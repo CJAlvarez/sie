@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Editar Sie </title>
+	   <link rel="stylesheet" href="/static/css/login.css">
+       <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+</head>
+<body>
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+		<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+                <br>
+                 <p>SISTEMA INFORMACION ESTADISTICA-SIE-CONEANFO</p>
+			    </div>
+
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+
+
+
+			      </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+
+            </ul>
+			     
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#">Contacto</a></li>
+			        <li><a href="#">información del Sistema</a></li>
+			        <li><a href="#">{% if user.is_authenticated %}
+					    	Bienvenido-<strong>{{user.username|capfirst}}</strong>
+						{% endif %}</a></li>
+                                                      <li><a href="{% url 'vista_logout'  %}"> cerrar sesión</a></li>
+
+
+			      </ul>
+			    </div>
+			  </div>
+		</nav>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+ 		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="">
+					<div class="panel-heading">
+						<h3 class="panel-title"></h3>
+					</div>
+					<div class="panel-body">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><strong>Instituciones y Proyectos</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+    <table class="table">
+           <tr>
+                                    <td>
+                                       <a href="{% url 'vista_dashboard' %}">Inicio</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <a href="{% url 'vista_proceso_educativo' %}">Proceso Educativo</a>
+                                    </td>
+                                </tr>
+         <tr>
+                                    <td>
+                                       <a href="{% url 'vista_modulos'%}">Modulos Proceso Educativo</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'vista_participantes' %}">Participantes</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                       <a href="{% url 'vista_matricula' %}">Ingreso Participantes al proceso</a>
+                                    </td>
+                                </tr>
+
+                                  <tr>
+                                    <td>
+                                       <a href="{% url 'vista_staff_facilitadores' %}">Staff Facilitadores</a>
+                                    </td>
+                                </tr>
+
+                                 <tr>
+                                    <td>
+                                       <a href="{% url 'vista_proyectos' %}">Proyectos</a>
+                                    </td>
+                                </tr>
+         <tr>
+                                    <td>
+                                       <a href="{% url 'vista_evaluaciones' %}">Evaluaciones</a>
+                                    </td>
+                                </tr>
+                                 <!--
+                                <tr>
+
+
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Proyectos</a>
+                                    </td>
+                                </tr>
+                                   <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Procesos Educativos</a>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Seguimiento Participante</a>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                    <td>
+                                       <a>Evaluaciones</a>
+                                    </td>
+                                </tr>
+                                -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><strong>Catalogos y Reportes</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Catalagos</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">Reportes</a>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <strong>Perfil</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="">Cambiar Contraseña</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">Manual Usuario</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">Capacitaciones</a>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><strong>Evaluaciones</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+				</div>
+			</div>
+            </div>
+
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+
+</div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-5 well">
+        <div class="panel panel-primary">
+        	  <div class="panel-heading">
+        			<h3 class="panel-title">Modificar Registro</h3>
+        	  </div>
+        	  <div class="panel-body">
+        			                <form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
+                            <table>
+
+                    {{formulario.as_table}}
+                                                                </table>
+
+                                        <input type="submit" value="Modificar" class="btn btn-lg btn-primary btn-block">
+
+
+                </form>
+
+        	  </div>
+        </div>
+
+
+
+           {% if messages %}
+                                            <ul class="messages">
+                                                {% for message in messages %}
+                                                    <div class="alert alert-danger">
+                                                    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    	<strong>Error!</strong>
+                                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+
+                                                    </div>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+    </div>
+
+
+</body>
+
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+
+</html>

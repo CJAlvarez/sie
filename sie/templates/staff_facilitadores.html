@@ -1,0 +1,426 @@
+{% extends "dashboard.html"%}
+
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {% block contenido %}
+<script src="https://use.fontawesome.com/2b7924f1a5.js"></script>
+
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 ">
+
+                <a class="btn btn-primary" data-toggle="modal" href="#modal-id">AGREGAR FACILITADOR</a>
+                                 <i  id="mostrar" class="fa fa-search" aria-hidden="true"><em>EDITAR CLICK AQUI</em></i>
+
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="search" autocomplete="off" placeholder="Buscar Datos">
+
+                </div>
+
+              
+                <div class="modal fade" id="modal-id">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">FORMULARIO  FACILITADORES</h4>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    {% if messages %}
+                                                        <ul class="messages">
+                                                            {% for message in messages %}
+                                                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        {% endif %}
+ <form action="/staff_facilitadores/" method="post"  enctype="multipart/form-data">{% csrf_token %}
+<table>
+    <tr>
+        <th>
+            <label for="id_ed_id">Educador id:</label>
+        </th>
+        <td>
+
+            <input  class="form-control" class="form-control" id="id_ed_id" maxlength="20" name="ed_id" type="text" readonly="readonly" value="{{ce}}{{a}}" required />
+        </td>
+    </tr>
+<tr><th><label for="id_ed_nombreeducador">Nombre Educador:</label></th><td>
+    <input required="required" id="id_ed_nombreeducador" maxlength="100" name="ed_nombreeducador" class="form-control"type="text" style='text-transform:uppercase;'/>
+    <h5>*Campo Requerido</h5>
+</td>
+</tr>
+<tr><th><label for="id_fechanacimiento">Fechanacimiento:</label></th><td><input   class="form-control" class="form-control" required="required" id="id_fechanacimiento" name="fechanacimiento" type="date" />
+<h5>*Campo Requerido</h5>
+</td></tr>
+
+    <tr><th><label for="id_cle">Tipo de Educador:</label></th><td><select  class="form-control" required="required" id="id_cle" name="cle">
+<option  class="form-control" value="" selected="selected">---------</option>
+    {% for edu in claseeducador %}
+            <option value="{{edu.cle_id}}">{{edu.cle_claseeducador}}</option>
+                {% endfor %}
+</select>
+<h5>*Campo Requerido</h5>
+</td></tr>
+<tr><th><label for="id_ed_identidad">Educador Identidad:</label></th><td><input  class="form-control" required="required" id="id_ed_identidad" maxlength="15" name="ed_identidad" type="text" />
+<h5>*Campo Requerido</h5>
+
+</td></tr>
+<tr>
+    <th>
+        <label for="id_ed_sexo">Educador Sexo:</label>
+    </th>
+    <td>
+     <select  class="form-control" required="required" id="id_ed_sexo" name="ed_sexo">
+            <option value="" selected="selected">---------</option>
+                {% for sex in sexo %}
+            <option value="{{sex.sexo}}">{{sex.sexo}}</option>
+                {% endfor %}
+        </select>
+        <h5>*Campo Requerido</h5>
+
+    </td>
+</tr>
+<tr> 
+
+    <th>
+        <label for="id_dep">Dep:</label>
+    </th>
+    <td>
+        <select  class="form-control" required="required"id="id_dep" name="dep">
+            <option value="" selected="selected">---------</option>
+                {% for dep in departamentos %}
+            <option value="{{dep.dep_id}}">{{dep.dep_departamento}}</option>
+                {% endfor %}
+        </select>
+        <h5>*Campo Requerido</h5>
+
+    </td>
+
+
+
+
+
+    </tr>
+<tr><th><label for="id_mun">Mun:</label></th><td>
+    <select   class="form-control" id="id_mun" name="mun">
+            <option value="" selected="selected">---------</option>
+            <option value=""></option>
+        </select>
+        <h5>*Campo Requerido</h5>
+
+</td>
+</tr>
+<tr>
+    <th>
+        <label for="id_aldea">Aldea:</label>
+    </th>
+    <td>
+
+          <select   class="form-control" id="id_aldea" name="aldea">
+            <option value="" selected="selected">---------</option>
+            <option value=""</option>
+
+        </select>
+<h5>*Campo Requerido</h5>
+
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_caserio">Caserio:</label>
+    </th>
+    <td>
+
+          <select   class="form-control" id="id_caserio" name="caserio">
+            <option value="" selected="selected">---------</option>
+
+        </select>
+        <h5>*Campo Requerido</h5>
+
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_ed_direccion">Direccion:</label>
+    </th>
+    <td>
+        <textarea   class="form-control"  cols="40" id="id_ed_direccion" name="ed_direccion" rows="10">
+        </textarea>
+    </td>
+</tr>
+<tr><th><label for="id_ed_telefono">Telefono:</label></th><td><input  class="form-control" id="id_ed_telefono" maxlength="10" name="ed_telefono" type="text" /></td></tr>
+<tr><th><label for="id_ed_correoelectronico">Correo Electronico:</label></th><td><input  class="form-control" id="id_ed_correoelectronico" maxlength="100" name="ed_correoelectronico" type="text" /></td></tr>
+<tr><th><label for="id_et">Etnia:</label></th>
+
+    <td>
+    <select   class="form-control" id="id_et" name="et">
+            <option value="" selected="selected">---------</option>
+                {% for et in etnia %}
+            <option value="{{et.et_id}}">{{et.et_nombreetnia}}</option>
+                {% endfor %}
+    </select>
+    <h5>*Campo Requerido</h5>
+
+</td>
+</tr>
+<tr>
+    <th>
+        <label for="id_ne">Nivel Educativo:</label>
+    </th>
+    <td>
+        <select  class="form-control" id="id_ne" name="ne">
+                <option value="" selected="selected">---------</option>
+            {% for catn in niveleducativo %}
+            <option value="{{catn.ne_id}}">{{catn.ne_niveleducativo}}</option>
+                {% endfor %}
+        </select>
+        <h5>*Campo Requerido</h5>
+
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_ed_gradoalcanzado">Educador Grado Alcanzado:</label>
+    </th>
+    <td>
+        <input    class="form-control" type="text" name="ed_gradoalcanzado" id="id_ed_gradoalcanzado" class="form-control" value=""   title="">
+         <h5>*Campo Requerido</h5>
+
+    </td>
+</tr>
+<tr><th><label for="id_ec">Estado Civil:</label></th><td>
+    <select  class="form-control" required="required" id="id_ec" name="ec">
+            <option value="" selected="selected">---------</option>
+                {% for es in estado %}
+            <option value="{{es.ec_id}}">{{es.ec_estadocivil}}</option> 
+                {% endfor %}
+
+    </select>
+    <h5>*Campo Requerido</h5>
+
+</td>
+</tr>
+<tr><th><label for="id_nac">Nacionalidad:</label></th><td><select  class="form-control"  required="required" id="id_nac" name="nac">
+<option  value="" selected="selected">---------</option>
+                {% for na in nacionalidad %}
+            <option value="{{na.nac_id}}">{{na.nac_nacionalidad}}</option>
+                {% endfor %}
+
+        </select>
+        <h5>*Campo Requerido</h5>
+
+</td>
+</tr>
+<tr><th><label for="id_cecap_id">Cecap id:</label></th><td><input  class="form-control" id="id_cecap_id"  readonly="readonly" name="cecap_id" value="{{a}}"/></td></tr>
+<tr><th><label for="id_clavececap">Clavececap:</label></th><td><input  class="form-control" id="id_clavececap" readonly="readonly"  maxlength="10" name="clavececap" type="text" value="{{ce}}"/></td></tr>
+<tr><th><label for="id_lasteditdate">Fecha Inicio:</label></th><td><input   class="form-control" required="required" id="id_lasteditdate" name="lasteditdate" type="date" />
+<h5>*Campo Requerido</h5>
+
+</td></tr>
+<tr><th><label for="id_creationdate">Fecha Creacion:</label></th><td><input  class="form-control" required="required" id="id_creationdate" name="creationdate" type="date" />
+
+<h5>*Campo Requerido</h5>
+
+</td></tr>
+</table>
+
+</table>
+
+
+     <input  type="submit" value="Guardar" class="btn btn-lg btn-primary btn-block">
+                                        </form>
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar Ventana</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <table id="mytable" class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th>IDENTIDAD</th>
+                        <th>NOMBRE EDUCADOR</th>
+                      
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for staffeducadores in contacts %}
+
+                    <tr>
+                        <td>{{staffeducadores.ed_identidad}}</td>
+                        <td>{{staffeducadores.ed_nombreeducador}}</td>
+                       <!-- <td> {% if staffeducadores.ed_sexo == "1" %}
+                        Femenino
+                        {% elif staffeducadores.ed_sexo == "2" %}
+                        Masculino
+                        {% endif %}
+                        </td>-->
+                       
+
+
+
+                             <td>
+                                 <a href="{% url 'vista_editar_facilitadores' staffeducadores.pk %}"><button type="submit" class="btn btn-primary">EDITAR</button></a>
+
+                            </td>
+
+                        <td>
+                            <a href="{% url 'vista_borrar_facilitadores' staffeducadores.pk %}"><button type="submit" class="btn btn-danger">ELIMINAR</button></a>
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                	<nav aria-label="...">
+  <ul class="pager">
+    <li>{% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">Anterior</a>
+        {% endif %}
+	</li>
+    <li>
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">Siguiente</a>
+        {% endif %}
+	</li>
+  </ul>
+</nav>
+            </div>
+
+<script  type="text/javascript" >
+    $("button").hide();
+    $("#mostrar").click(function(){
+    $("button").show();
+    $("#mostrar").dblclick(function(){
+    $("button").hide();
+        });
+    });
+</script>
+
+  <script>
+
+   // When document is ready: this gets fired before body onload 🙂
+$(document).ready(function(){
+        // Write on keyup event of keyword input element
+        $("#search").keyup(function(){
+            // When value of the input is not blank
+            if( $(this).val() != "")
+            {
+                // Show only matching TR, hide rest of them
+                $("#mytable tbody>tr").hide();
+                $("#mytable td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+            }
+            else
+            {
+                // When there is no input or clean again, show everything back
+                $("#mytable  tbody>tr").show();
+            }
+        });
+    });
+    // jQuery expression for case-insensitive filter
+    $.extend($.expr[":"],
+    {
+        "contains-ci": function(elem, i, match, array)
+        {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
+
+
+        </script>
+ <script type="text/javascript">
+    $(function(){
+    $('#id_dep').change(function() {
+    var id = $("#id_dep").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].pk+'">'+data[i].mun_municipio+'</option>'}
+    $('#id_mun').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_mun').change(function() {
+    var id = $("#id_mun").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_al' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idaldea+'">'+data[i].nombrealdea+'</option>'}
+    $('#id_aldea').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_aldea').change(function() {
+    var id = $("#id_aldea").val();{
+    //alert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_ca' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idcaserio+'">'+data[i].nombrecaserio+'</option>'}
+    $('#id_caserio').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+
+<script type="text/javascript">
+$(function() {
+    $('#id_fechanacimiento').datepicker({
+      dateFormat: 'yy-mm-dd',
+      defaultDate: "+2m"
+    });
+      $('#id_lasteditdate').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_creationdate').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+});
+</script>
+
+
+
+	</div>
+
+{% endblock %}
+

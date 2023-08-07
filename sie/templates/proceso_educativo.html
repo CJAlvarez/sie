@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SIE-CONEANFO</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/rgf/static/js/bootstrap-datepicker3.min.css"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://use.fontawesome.com/2b7924f1a5.js"></script>
+
+</head>
+<body>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			    
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <br>
+                 <p>SISTEMA INFORMACION ESTADISTICA-SIE-CONEANFO</p>
+                </div>
+
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			      </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+
+            </ul>
+
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#">CECAPID:{{user.clavecap}}</a></li>
+			        <li><a href="#">INFORMACION DEL SISTEMA</a></li>
+			        <li><a href="#">{% if user.is_authenticated %}
+					    	BIENVENIDO-<strong>{{user.username|capfirst}}</strong>
+						{% endif %}</a></li>
+                      <li><a href="{% url 'vista_logout'  %}"> CERRAR SESION</a></li>
+
+
+			      </ul>
+			    </div>
+			  </div>
+		</nav>
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="">
+					<div class="panel-heading">
+						<h3 class="panel-title"></h3>
+					</div>
+					<div class="panel-body">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><strong>INSTITUCIONES Y PROYECTOS</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                 <tr>
+                                    <td>
+                                       <a href="{% url 'vista_dashboard' %}">INICIO</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <a href="{% url 'vista_proceso_educativo' %}">PROCESO EDUCATIVO</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <a href="{% url 'vista_staff_facilitadores' %}">FACILITADORES</a>
+                                    </td>
+                                </tr>
+                               
+                                <tr>
+                                    <td>
+                                       <a href="{% url 'vista_modulos'%}">MODULOS PROCESO EDUCATIVO</a>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                     <td>
+                                        <a href="{% url 'vista_participantes' %}">PARTICIPANTES</a>
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td>
+                                       <a href="{% url 'vista_matricula' %}">INGRESO PARTICIPANTES AL PROCESO</a>
+                                    </td>
+                                </tr>
+                                   
+                                    <tr>
+                                    <td>
+                                       <a href="{% url 'vista_proyectos' %}">PROYECTOS</a>
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td>
+                                       <a href="{% url 'vista_seguimientoparticipantes' %}">SEGUIMIENTO PARTICIPANTES</a>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                       <a href="{% url 'vista_evaluaciones' %}">EVALUACIONES</a>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><strong>CATALOGOS Y REPORTES</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                              
+                                <tr>
+                                    <td>
+                                        <a href="">REPORTES</a>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <strong>PERFIL</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'vista_cambiarcontrasena'%}">CAMBIAR CONTRASEÑA</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">MANUAL USUARIO</a></span>
+                                    </td>
+                                </tr>
+                                
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+				</div>
+			</div>
+            </div>
+                <script>
+
+   // When document is ready: this gets fired before body onload 🙂
+$(document).ready(function(){
+        // Write on keyup event of keyword input element
+        $("#search").keyup(function(){
+            // When value of the input is not blank
+            if( $(this).val() != "")
+            {
+                // Show only matching TR, hide rest of them
+                $("#mytable tbody>tr").hide();
+                $("#mytable td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+            }
+            else
+            {
+                // When there is no input or clean again, show everything back
+                $("#mytable  tbody>tr").show();
+            }
+        });
+    });
+    // jQuery expression for case-insensitive filter
+    $.extend($.expr[":"],
+    {
+        "contains-ci": function(elem, i, match, array)
+        {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
+
+
+        </script>
+
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                 <div class="alert">
+                	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                	<strong>TOTAL DE <strong>{{cuenta}}</strong> PROCESOS EDUCATIVOS INGRESADOS</strong>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="search" autocomplete="off" placeholder="Buscar Datos">
+
+                </div>
+
+
+                <a class="btn btn-primary" data-toggle="modal" href="#modal-id">AGREGAR PROCESO EDUCATIVO</a>
+                 <i  id="mostrar" class="fa fa-search" aria-hidden="true"><em>EDITAR CLICK AQUI</em></i> 
+
+          
+                <div class="modal fade" id="modal-id">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">FORMULARIO PROCESO EDUCATIVO</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                                         <form action="/proceso_educativo/" method="post"  enctype="multipart/form-data">{% csrf_token %}
+                                                <div class="panel panel-primary">
+                                                	<div class="panel-body">
+                                                <table>
+                                                <tr><th><label for="id_cecap_id">CECAP ID:</label></th><td><input  readonly id="id_cecap_id" name="cecap_id" type="text" value="{{a}}" class="form-control" hidden="hidden" />
+                                                </td></tr>
+                                                <tr><th><label for="id_clavececap">CLAVECECAP:</label></th><td>
+                                                 <tr><th><label for="id_cd_descripcion">CLAVE CECAP:</label><td><select name="clavececap" id="id_clavececap" readonly class="form-control" ><option value="{{ce}}">{{us}} </option></select></td></th></tr>
+
+                                                </td>
+                                                    </tr>
+                                                <tr><th><label for="id_clave">CLAVE:</label></th><td><input id="id_clave" maxlength="20" name="clave"  readonly type="text" required class="form-control" value="{{ce}}{{a}}"  /></td></tr>
+                                                <tr><th><label for="id_cd_id">CDID:</label></th><td><input  readonly id="id_cd_id" name="cd_id" type="text" class="form-control" value="{{a}}" hidden="hidden" /></td></tr>
+                                                <tr><th><label for="id_Nombre_Proceso">NOMBRE PROCESO:</label></th>
+
+
+                                                    <td><input  style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" id="id_Nombre_Proceso" maxlength="100" name="Nombre_Proceso" class="form-control"  required="required"type="text" class="form-control"/>
+
+                                                                                                        <h5>*Campo Requerido</h5>    
+
+                                                    </td></tr>
+                                                <tr><th><label for="id_Nombre_Salida" >NOMBRE SALIDA:</label></th><td><input id="id_Nombre_Salida" required="required" maxlength="100" name="Nombre_Salida" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="textarea"  class="form-control" />
+                                                    <h5>*Campo Requerido</h5>
+                                                </td></tr>
+                                                <tr><th><label for="id_Total_Horas">TOTAL HORAS:</label></th><td><input id="id_Total_Horas" required="required" name="Total_Horas" required="required" type="number"  class="form-control"/>
+                                                    <h5>*Campo Requerido</h5>
+                                                </td></tr>
+                                                <!--
+                                                <tr><th><label for="id_Proceso_Formacion">Proceso Formacion:</label></th><td><input id="id_Proceso_Formacion" maxlength="200"  name="Proceso_Formacion"  class="form-control" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase(); type="text" /></td></tr>
+                                                -->
+                                                <tr><th><label for="id_Objetivo">OBJETIVOS:</label></th><td><input id="id_Objetivo" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="200" name="Objetivo" required="required" type="text" class="form-control"/>
+                                                    <h5>*Campo Requerido</h5>
+                                                </td></tr>
+                                                <tr><th><label for="id_ev_fechainicial"> FECHA INICIAL:</label></th><td><input id="id_ev_fechainicial" required="required" name="ev_fechainicial"  class="form-control" type="text" />
+                                                    <h5>*Campo Requerido</h5>
+                                                </td></tr>
+                                                <tr><th><label for="id_ev_fechafinal">FECHA FINAL:</label></th><td><input id="id_ev_fechafinal" name="ev_fechafinal" required="required"type="text"  class="form-control" />
+                                                    <h5>*Campo Requerido</h5>
+                                                </td></tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="id_dep" >DEPARTAMENTO:</label></th>
+                                                    <td>
+                                                        <select required="required" id="id_dep" name="dep" class="form-control">
+                                                            <option value="" selected="selected" class="form-control">SELECCIONE DEPARTAMENTO</option>
+                                                            {% for dep in departamentos %}
+                                                            <option value="{{dep.dep_id}}" class="form-control">{{dep.dep_departamento}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <h5>*Campo Requerido</h5>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="id_mun">MUNICIPIO:</label>
+                                                    </th>
+                                                    <td>
+                                                        <select required="required" id="id_mun" name="mun"  class="form-control">
+                                                            <option class="form-control" selected="selected">SELECCIONE MUNICIPIO</option>
+                                                        </select>
+                                                        <h5>*Campo Requerido</h5>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label >DONDE DESARROLLARA PROCESO:</label>
+                                                    </th>
+                                                    <td>
+                                                        <select  required="required" id="id_Donde_desarrollara_proceso" class="form-control" name="Donde_desarrollara_proceso">
+                                                        {% for p in sede %}
+                                                            <option value="{{p.ts_id}}"  class="form-control">{{p.ts_tiposede}}</option>
+                                                        {% endfor %}
+                                                            </select>
+                                                    </td>
+                                                </tr>
+                                                <tr><th><label for="id_opcioneducativa">OPCIONES EDUCATIVAS:</label></th>
+                                                    <td><select required="required" id="id_opcioneducativa" class="form-control" name="opcioneducativa">
+                                                <option value="" selected="selected" >SELECCIONE OPCIONES EDUCATIVAS</option>
+
+                                                {% for opcion in educativa %}
+                                                            <option  required="required" value="{{opcion.oe_id}}"  class="form-control">{{opcion.oe_opcioneducativa}}</option>
+                                                            {% endfor %}
+
+                                                    </select>
+                                                    <h5>*Campo Requerido</h5>
+                                                </td>
+                                                </tr>
+                                                <tr><th><label for="id_metodologiatxt">METODOLOGIA</label></th><td><input class="form-control" id="id_metodologiatxt" maxlength="80" name="metodologiatxt" type="text"/></td></tr>
+                                                <tr><th><label  for="id_tipomaterial">TIPOMATERIAL:</label></th><td><select class="form-control" required="required" id="id_tipomaterial" name="tipomaterial">
+                                                <option value="" selected="selected" class="form-control">ELIGA TIPO MATERIAL</option>
+                                                             {% for opcion in material %}
+                                                            <option value="{{opcion.md_id}}"  class="form-control">{{opcion.md_materialdidactico}}</option>
+                                                            {% endfor %}
+                                                </select>
+                                                <h5>*Campo Requerido</h5>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="id_modalidad">MODALIDAD:</label></th><td><select id="id_modalidad" required="required" class="form-control"name="modalidad">
+                                                        <option value="" class="form-control" selected="selected">ELIGE TIPO MODALIDAD</option>
+                                                     {% for modalidades in modalidades %}
+                                                            <option value="{{modalidades.mo_id}}"  class="form-control">{{modalidades.mo_modalidades}}</option>
+                                                            {% endfor %}
+
+                                                </select>
+                                                <h5>*Campo Requerido</h5>
+                                                </td>
+                                                </tr>
+                                                <tr><th><label for="id_tipomodalidad">TIPO MODALIDAD:</label></th>
+                                                    <td><select required="required" class="form-control"id="id_tipomodalidad" name="tipomodalidad" required>
+                                                <option value="" selected="selected" class="form-control">ELIGE TIPO MODALIDAD</option>
+                                                {% for tmodalidades in tmodalidades %}
+                                                            <option value="{{tmodalidades.tmod_id}}"  class="form-control">{{tmodalidades.tmodo_tipomodalidad}}</option>
+                                                            {% endfor %}
+                                                </select>
+                                                <h5>*Campo Requerido</h5>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                    <th><label for="id_sectoreconomico">SECTOR ECONOMICO:</label>
+                                                </th>
+
+                                                           <td><select required="required" class="form-control"id="id_sectoreconomico" name="sectoreconomico" >
+                                                <option value="" selected="selected" class="form-control">ElIGE SECTOR ECONOMICO</option>
+                                                {% for sector in sectores %}
+                                                            <option value="{{sector.se_id}}"  class="form-control">{{sector.se_sectoreconomico}}</option>
+                                                            {% endfor %}
+                                                </select>
+                                                <h5>*Campo Requerido</h5>
+                                                </td>
+                                                </tr>
+                                                <tr><th><label for="id_proyectoid" >PROYECTOS:</label></th><td><select  id="id_proyectoid" name="proyectoid" class="form-control">
+                                                <option value="" selected="selected" class="form-control">SELECCIONA PROYECTO SI LO TIENE</option>
+                                                        {% for proyecto in proyectos %}
+                                                            <option value="{{proyecto.proyectoid}}"  class="form-control">{{proyecto.proyectonombre}}</option>
+                                                            {% endfor %}
+                                                </select></td></tr>
+
+                                            </table>
+
+                                                <input type="submit" value="Guardar" class="btn btn-lg btn-primary btn-block">
+                                                    </div>
+                                                </div>
+                                        </form>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">CERRAR VENTANA</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+                    <table id="mytable"class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th>CLAVE</th>
+                        <th>NOMBRE PROCESO</th>
+                        <th>TOTAL/HORAS</th>
+                        <th>FECHA INICIO</th>
+                        <th>FECHA INICIO</th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for procesoeducativo in contacts %}
+                    <tr>
+                        <td>{{procesoeducativo.clavececap}}</td>
+                        <td>{{procesoeducativo.Nombre_Proceso}}</td>
+                        <td>{{procesoeducativo.Total_Horas}}</td>
+                        <td>{{procesoeducativo.ev_fechainicial|date:"Y-m-d "}}</td>
+                        <td>{{procesoeducativo.ev_fechafinal|date:"Y-m-d "}}</td>
+                        <td>
+                             <a href="{% url 'vista_editar_proceso' procesoeducativo.cecap_id %}"><button type="submit" class="btn btn-primary">EDITAR</button></a>
+                        </td>
+
+                        <td>
+                            <a href="{% url 'vista_borrar_proceso' procesoeducativo.cecap_id %}"><button type="submit" class="btn btn-danger">BORRAR</button></a>
+                        
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ contacts.number }} de {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </span>
+</div>
+
+            </div>
+
+
+<script  type="text/javascript" >
+    $("button").hide();
+    $("#mostrar").click(function(){
+    $("button").show();
+    $("#mostrar").dblclick(function(){
+    $("button").hide();
+        });
+    });
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_dep').change(function() {
+    var id = $("#id_dep").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].pk+'">'+data[i].mun_municipio+'</option>'}
+    $('#id_mun').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_mun').change(function() {
+    var id = $("#id_mun").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_al' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idaldea+'">'+data[i].nombrealdea+'</option>'}
+    $('#id_aldea').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_aldea').change(function() {
+    var id = $("#id_aldea").val();{
+    //alert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_ca' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idcaserio+'">'+data[i].nombrecaserio+'</option>'}
+    $('#id_caserio').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $('#id_ev_fechainicial').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_ev_fechafinal').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+});
+</script>
+<script type="text/javascript">
+$(function() {
+    $('#id_fechainiciomod1').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod1').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+    $('#id_fechainiciomod2').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod2').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod3').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod3').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod4').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod4').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod5').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod5').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod6').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod6').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod7').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod7').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod8').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod8').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod9').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod9').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod10').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod10').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod11').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod11').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod12').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod12').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod13').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod13').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod14').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod14').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod15').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod15').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod16').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod16').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod17').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod17').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod18').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod18').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod19').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod19').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod20').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod20').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod21').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod21').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod22').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod22').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod23').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod23').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod24').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod24').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod25').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod25').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod26').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod26').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod27').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod27').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod28').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod28').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod29').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod29').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod30').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod30').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+});
+
+</script>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+    <footer>
+  <div class="container">
+    <h5>Sistema SIE-CONEANFO <a href="http://www.coneanfo.hn/" rel="author"></a> Derechos Reservados @ 2017</h5>
+  </div>
+</footer>
+</div>
+
+	</div>
+
+
+ </body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SIE-CONEANFO</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+<body>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <br>
+			      <strong>SISTEMA INFORMACION ESTADISTICO</strong>
+			    </div>
+
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			 
+			      
+			       
+			      </ul>
+			      <form class="navbar-form navbar-left" role="search">
+			        <div class="form-group">
+			          <input type="text" class="form-control" placeholder="buscar información">
+			        </div>
+			        <button type="submit" class="btn btn-success">Buscar</button>
+			      </form>
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#">Contacto</a></li>
+			        <li><a href="#">información del Sistema</a></li>
+			        <li><a href="#">Bienvenido Alejandro Garcia</a></li>
+
+			      </ul>
+			    </div>
+			  </div>
+		</nav>
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title">Modulos</h3>
+					</div>
+					<div class="panel-body">	
+		
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><strong>Centro de Capacitaciones</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                       <a href="http://www.jquery2dotnet.com">Oferta Educativa</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Staff Facilitadores</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <a href="http://www.jquery2dotnet.com">Participantes</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Proyectos</a>
+                                    </td>
+                                </tr>
+                                   <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Procesos Educativos</a>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Seguimiento Participante</a>
+                                    </td>
+                                </tr> <tr>
+                                    <td>
+                                       <a href="{% url 'vista_evaluaciones' %}">Evaluaciones</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><strong>Catalogos y Reportes</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Catalagos</a> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">Reportes</a>
+                                    </td>
+                                </tr>
+                            
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <strong>Perfil</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="">Cambiar Contraseña</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">Manual Usuario</a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">Capacitaciones</a>
+                                    </td>
+                                </tr>
+                               
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><strong>Evaluaciones</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+					</div>
+				</div>	
+			</div>	
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title"></h3>
+					</div>
+					<div class="panel-body">
+					
+
+						<form action="" method="POST" role="form">
+                            <legend>Formulario Oferta Educativa</legend>
+                        
+                            <div class="form-group">
+                                <label for="">Oferta Educativa</label>
+                                <input type="text" class="form-control" id="" placeholder="">
+                                    <label for="">Nombre de Salida</label>
+                                <input type="text" class="form-control" id="" placeholder="">
+                                    <label for="">Clave CCAP</label>
+                                <input type="text" class="form-control" id="" placeholder="">
+                                    <label for="">Total Horas</label>
+                                <input type="text" class="form-control" id="" placeholder="">
+
+                               <div class="radio">
+                                   <label>
+                                       <input type="radio" name="" id="input" value="">
+                                       ¿Es un proceso de formacion de formadores?
+                                   </label>
+                               </div>
+                               <hr>
+                               <p>Objetivo</p>
+                               <textarea name="" id="input" class="form-control" rows="3" required="required"></textarea>
+                            </div>
+                        
+                            
+                        
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+
+
+					</div>
+				</div>
+			</div>
+
+
+
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <input type="search" name="" id="input" class="form-control" value="" required="required" title="">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 well">
+               <table class="table table-hover">
+                   <thead>
+                       <tr>
+                           <th>Nombre Curso</th>
+                            <th>Total Horas</th>
+                           <th>Objetivos</th>
+                           <th>Ver Detalle</th>
+
+                       </tr>
+
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td>Curso Electronica</td>
+                              <td>48 horas</td>
+                                 <td>Lograr un Correcto Aprendizaje</td>
+                                 <td><button type="button" class="btn btn-sm btn-danger">Ver</button></td>
+                       </tr>
+                       <tr>
+                           <td>Curso Electronica</td>
+                              <td>48 horas</td>
+                                 <td>Lograr un Correcto Aprendizaje</td>
+                                 <td><button type="button" class="btn btn-sm btn-danger">Ver</button></td>
+                       </tr>
+                       <tr>
+                           <td>Curso Electronica</td>
+                              <td>48 horas</td>
+                                 <td>Lograr un Correcto Aprendizaje</td>
+                                 <td><button type="button" class="btn btn-sm btn-danger">Ver</button></td>
+                       </tr>
+                       <tr>
+                           <td>Curso Electronica</td>
+                              <td>48 horas</td>
+                                 <td>Lograr un Correcto Aprendizaje</td>
+                                 <td><button type="button" class="btn btn-sm btn-danger">Ver</button></td>
+                       </tr>
+                       <tr>
+                           <td>Curso Electronica</td>
+                              <td>48 horas</td>
+                                 <td>Lograr un Correcto Aprendizaje</td>
+                                 <td><button type="button" class="btn btn-sm btn-danger">Ver</button></td>
+                       </tr>
+                       <tr>
+                           <td>Curso Electronica</td>
+                              <td>48 horas</td>
+                                 <td>Lograr un Correcto Aprendizaje</td>
+                                 <td><button type="button" class="btn btn-sm btn-danger">Ver</button></td>
+                       </tr>
+                       <tr>
+                           <td>Curso Electronica</td>
+                              <td>48 horas</td>
+                                 <td>Lograr un Correcto Aprendizaje</td>
+                                 <td><button type="button" class="btn btn-sm btn-danger">Ver</button></td>
+                       </tr>
+                   </tbody>
+               </table>
+            </div>
+    
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+	<footer>
+  <div class="container">
+    <p>Sistema SIE-CONEANFO <a href="http://www.coneanfo.hn/" rel="author"></a> Derechos Reservados @ 2017</p>
+  </div>
+</footer>
+</div>
+
+	</div>
+	<script src="/coneanfo/js/jquery.js"></script>
+	<script src="/coneanfo/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+ </body>
+</html>

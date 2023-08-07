@@ -1,0 +1,561 @@
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+
+<h3>Reporte Educadores</h3>
+<hr>
+
+
+
+       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 ">
+             <div class="form-group">
+      <h5><span class="label label-success">Filtros</span></h5>
+              <select multiple class="form-control" id="sel1" name="filtro">
+                  {% for MasterFiltroHQ in filtros %}
+                <option value="{{MasterFiltroHQ.tabla}}{{MasterFiltroHQ.nombre}}" >{{MasterFiltroHQ.alias}}</option>
+                                      {% endfor %}
+
+              </select>
+
+            </div>
+
+       </div>
+       <div id="clear">
+
+       <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 ">
+              <h5><span class="label label-success">Opciones  </span></h5>
+
+              <form  id="fomulario" action="/exportar_educadores/" method="post" role="form" enctype="multipart/form-data">
+
+ 
+
+
+
+
+
+
+            <select name="zip" id="zip" class="form-control">
+                <option value="0">-----Seleccione CECAPS--------</option>
+
+                    {% for c in nombres %}
+                 <option value="''{{c.username}}''">{{c.username}}</option>
+                      {% endfor %}
+
+
+
+
+            </select>
+
+
+             
+
+
+       </div>
+
+
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                      <h5><span class="label label-success">Operadores</span></h5>
+
+           <div class="form-group">
+              <label for="sel2">Selecciona Operador:</label>
+              <select class="form-control" id="operador" name="operador">
+                  <option value="">Seleccione Operador</option>
+                <option value="=">Igual =</option>
+                  <option value="<>">Distinto <></option>
+                  <option value=">">Mayor que ></option>
+                  <option value="<">Menor que<</option>
+                  <option value=">=">Mayor o igual >=</option>
+                  <option value="<=">Menor o igual <=</option>
+                <option value="+">Suma +</option>
+                <option value="BETWEEN">BETWEEN</option>
+
+              </select>
+
+
+            </div>
+          <select class="form-control" id="andor" name="andor">
+         <option value="">Seleccione Condicion</option>
+
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+
+              </select>
+
+
+
+        <button id="limpiar" type="button" class="btn btn-danger btn-sm">Limpiar</button>
+      </div>
+
+
+</form>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 ">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 well">
+
+
+
+<form  action="" method="post" id="formulario" role="form" enctype="multipart/form-data" >
+
+
+
+
+
+    <table class="table table-bordered table-hover" id="tabla" >
+        <thead>
+            <tr>
+               <tr>
+            <th>Filtro</th>
+            <th>Operador</th>
+            <th>Valor</th>
+            <th>Condicion</th>
+
+
+
+        </thr>
+            </tr>
+        </thead>
+        <tbody>
+        <input type="button" class="btn btn-success" id="agregar" value="Agregar Filtro" />
+                <button type="button"  id="del" class="btn btn-danger btn-sm">Eliminar Filtro</button>
+                 <button type="button"  id="reset" class="btn btn-info btn-sm">Limpiar Filtros</button>
+
+
+            <td id="sz"></td>
+            <td id="oper"></td>
+            <td id="pa"></td>
+            <td id="co"></td>
+
+        </tr>
+        </tbody>
+    </table>
+<table class="table table-hover" id="eliminar">
+    <thead>
+        <tr>
+            <th>Filtros Seleccionado</th>
+
+        </tr>
+    </thead>
+    <tbody id='perron'>
+        <tr class="fila-base">
+            <td id="resultado"></td>
+        </tr>
+    </tbody>
+</table>
+
+ </form>
+
+<div id='valores'></div>
+</div>
+
+
+
+  
+</div>
+
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+  
+
+
+  <table class="table table-striped" id="customers">
+    <thead>
+      <tr>
+        <th>Cecap</th>
+        <th>Nombre</th>
+        <th>Departamento</th>
+        <th>Municipio</th>
+        <th>Identidad</th>
+        <th>Fecha Nacimiento</th>
+        <th>Edad</th>
+        <th>Nivel Educativo</th>
+        <th>Grado Alcanzado</th>
+<th>Clase de Educador</th>
+<th>Telefono</th>
+<th>Celular</th>
+<th>Email</th>
+  
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in resultado %}
+      <tr>
+        <td>{{a.cecap}}</td>
+        <td>{{a.nombre}}</td>
+        <td>{{a.nombre}}</td>
+        <td>{{a.departamento}}</td>
+        <td>{{a.municipio}}</td>
+        <td>{{a.identidad}}</td>
+        <td>{{a.fechanacimiento}}</td>
+        <td>{{a.edad}}</td>
+        <td>{{a.nivelescolar}}</td>
+        <td>{{a.grado}}</td>
+        <td>{{a.claseeducador}}</td>
+        <td>{{a.telefono}}</td>
+        <td>{{a.celular}}</td>
+        <td>{{a.correo}}</td>
+     
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>  
+<script>
+//    $("#export").click(function(){
+  //    $("#customers").tableToCSV();
+   // });
+
+$(document).ready(function() {
+    $('#customers').DataTable( {
+        iDisplayLength: '500000',
+        dom: 'Bfrtip',
+        buttons: [
+            'excelHtml5',
+            
+            'pdfHtml5',
+        ]
+    });
+} );
+</script>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+$("#reset").click(function () {
+      location.reload();
+    });
+</script>
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+
+        $(document).ready(function() {
+
+
+          $("#proceso").click(function() {
+            var x = $(this).val();
+            $("#total").append(x);
+
+            });
+
+            $("#sel1").click(function() {
+            var x = $(this).val();
+            $("#total").append(x);
+
+            });
+
+
+            $("#proyectos").change(function() {
+            var y = $(this).val();
+            $("#total").append(y);
+
+            });
+
+
+
+            $("#zip").change(function() {
+            var z = $(this).val();
+            $("#total").append(z);
+
+            });
+
+
+            $("#departamento").change(function() {
+            var d = $(this).val();
+            $("#total").append(d);
+            });
+
+            $("#categoria").change(function() {
+            var ca = $(this).val();
+            $("#total").append(ca);
+            });
+
+
+
+           $("#operador").change(function() {
+            var a = $(this).val();
+            $("#total").append(a);
+            });
+
+           $("#inactive").change(function() {
+            var i = $(this).val();
+            $("#total").append(i);
+            });
+
+            $("#numero").change(function() {
+            var n = $(this).val();
+            $("#total").append(n);
+            });
+
+
+            $("#code").change(function() {
+            var code = $(this).val();
+            $("#total").append(code);
+            });
+
+
+
+             $("#andor").change(function() {
+            var t = $(this).val();
+            $("#total").append(t);
+
+            });
+
+
+
+        });
+
+
+     $("button").submit(function(){
+    $.post("/exportar_educadores/", function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+});
+
+    </script>
+
+<script type="text/javascript">
+      $(document).ready(function(){
+              $("#limpiar").click(function(){
+              $("#fomulario")[0].reset();
+              });});
+
+    </script>
+
+{# plugin datepicker#}
+<script>
+   $(function() {
+    $('#datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+{#        onSelect: function(datetext){#}
+{#            var d = new Date(); // for now#}
+{#            datetext=datetext+" "+d.getHours()+": "+d.getMinutes()+": "+d.getSeconds();#}
+{#            $('#datepicker').val(datetext);#}
+{#        },#}
+    });
+});
+  </script>
+<script>
+
+
+$(function() {
+    $('#datepicker2').datepicker({
+        dateFormat: 'yy-mm-dd',
+{#        onSelect: function(datetext){#}
+{#            var d = new Date(); // for now#}
+{#            datetext=datetext+" "+d.getHours()+": "+d.getMinutes()+": "+d.getSeconds();#}
+{#            $('#datepicker2').val(datetext);#}
+{#        },#}
+    });
+});
+  </script>
+{# plugin datepicker#}
+  </script>
+     {% if error %}
+             <script>
+                 alert('{{ error }}');
+                 window.location= "/reporte_educadores/"
+             </script>
+         {% endif %}
+
+<script type="text/javascript">
+
+$(function(){
+    // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+    $("#agregar").on('click', function(){
+       $("#tabla tbody tr:eq(0)").clone().appendTo("#resultado");
+
+       $('#perron').on('click',function(){
+         var papa =$(this).text()
+         $("#valores").html('<html> <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well"><form action="/exportar_educadores/" method="post" id="formulario" role="form" enctype="multipart/form-data"><br> <input type="hidden" name="total" id=""  value="'+papa+'"class="form-control"> Usted Eligio los Siguiente Parametros'+papa+'</input><br><br><br><button type="submit" class="btn btn-primary">Enviar Consulta</button><form></div></html>');
+
+       });
+
+    });
+
+    // Evento que selecciona la fila y la elimina
+    $(document).on("click",".eliminar",function(){
+        var parent = $(this).parents().get(0);
+        $(parent).remove();
+    });
+
+
+
+
+
+});
+
+
+
+$("#del").click(function(){
+
+            // Obtenemos el total de columnas (tr) del id "tabla"
+
+            var trs=$("#eliminar tr").length;
+
+            if(trs>1)
+
+            {
+
+                // Eliminamos la ultima columna
+
+                $("#eliminar tr:last").remove();
+
+            }
+
+});
+</script>
+<script type="text/javascript">
+$("#reset").click(function () {
+      location.reload();
+    });
+</script>
+<script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $("#sel1").click(function() {
+            var x = $(this).val();
+            $("#sz").html(x);
+
+            });
+
+
+            $("#proyectos").change(function() {
+            var y = $(this).val();
+            $("#pa").html(y);
+
+            });
+
+
+             $("#like").change(function() {
+            var d = $(this).val();
+            var name = "''%"+d+"%''";
+            $("#pa").html(name);
+            });
+
+
+
+            $("#datepicker").click(function() {
+            var ac = $(this).val();
+            var fecha = "''"+ac+"''";
+            $("#pa").html(fecha);
+            });
+
+
+
+            $("#cuenta").click(function() {
+            var cuenta = $(this).val();
+            var fecha = "''"+cuenta+"''";
+            $("#pa").html(fecha);
+            });
+
+
+
+
+            $("#zip").change(function() {
+            var z = $(this).val();
+            $("#pa").html(z);
+
+            });
+
+
+            $("#departamento").change(function() {
+            var d = $(this).val();
+            $("#pa").html(d);
+            });
+
+            $("#status").change(function() {
+            var ca = $(this).val();
+            $("#pa").html(ca);
+            });
+
+
+
+           $("#operador").change(function() {
+            var a = $(this).val();
+            $("#oper").html(a);
+            });
+
+           $("#inactive").change(function() {
+            var i = $(this).val();
+            $("#pa").html(i);
+            });
+
+            $("#numero").change(function() {
+            var n = $(this).val();
+            $("#pa").html(n);
+            });
+
+
+            $("#code").change(function() {
+            var code = $(this).val();
+            $("#pa").html(code);
+            });
+
+
+            $("#proceso").change(function() {
+            var code = $(this).val();
+            $("#pa").html(code);
+            });
+
+
+
+            $("#opcionedu").change(function() {
+            var code = $(this).val();
+            $("#pa").html(code);
+            });
+
+            $("#andor").change(function() {
+            var t = $(this).val();
+            $("#co").html(t);
+
+            });
+
+
+        });
+
+
+         $("button").submit(function(){
+        $.post("/exportar_educadores/", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+                });
+            });
+
+    </script>
+<script type="text/javascript">
+      $(document).ready(function(){
+              $("#limpiar").click(function(){
+              $("#fomulario")[0].reset();
+              });});
+
+    </script>
+
+<script type="text/javascript">
+$(function() {
+    $('#datepicker').datepicker({
+      dateFormat: 'yy-mm-dd',
+
+
+    });
+});
+</script>
+
+</body>
+{% endblock %}
+
+
+</html>

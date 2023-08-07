@@ -1,0 +1,99 @@
+
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+
+
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+
+</div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-primary">
+        	  <div class="panel-heading">
+        			<h3 class="panel-title">Editar Personas</h3>
+        	  </div>
+        	  <div class="panel-body">
+        			  <form action="" method="post"  enctype="multipart/form-data">
+            <table>
+                {{ formulario.as_table}}
+
+            </table>
+            <input type="submit" value="Modificar" class="btn btn-lg btn-primary btn-block">
+        </form>
+        	  </div>
+        </div>
+    </div>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_dep').change(function() {
+    var id = $("#id_dep").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].pk+'">'+data[i].mun_municipio+'</option>'}
+    $('#id_mun').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_mun').change(function() {
+    var id = $("#id_mun").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_al' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idaldea+'">'+data[i].nombrealdea+'</option>'}
+    $('#id_aldea').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_aldea').change(function() {
+    var id = $("#id_aldea").val();{
+    //alert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_ca' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idcaserio+'">'+data[i].nombrecaserio+'</option>'}
+    $('#id_caserio').html(html);
+    }
+    });
+    };
+    })});
+</script>
+{% endblock %}
+
+
+</body>
+
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+

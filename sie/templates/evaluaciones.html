@@ -1,0 +1,117 @@
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 ">
+                <div class="panel panel-primary">
+                	  <div class="panel-heading">
+                			<h3 class="panel-title">Personas por Personas</h3>
+                	  </div>
+                	    <div class="panel-body">
+                            <table class="table table-hover">
+                            	<thead>
+                            		<tr>
+                            			<th>Proceso Educativo</th>
+                                        <th>Inicio</th>
+                            			<th>Finalización</th>
+                                        <th>Modulos</th>
+
+                            		</tr>
+                            	</thead>
+                            	<tbody>
+                                        {% for l in lista %}
+                                    <tr>
+                            			<td>{{l.Nombre_Proceso}}</td>
+                            		    <td>{{l.ev_fechainicial|date:"Y-m-d "}}</td>
+                                        <td>{{l.ev_fechafinal|date:"Y-m-d "}}</td>
+                                        <td><a href="{% url 'vista_evaluacion2' l.clave %}"><button type="submit" class="btn btn-primary">Ver Modulos</button></a></td>
+
+                                    </tr>
+                                        {% endfor %}
+
+                            	</tbody>
+                            </table>
+
+                	  </div>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                <table class="table table-bordered table-hover">
+                                	<thead>
+                                		<tr>
+                                			<th></th>
+                                		</tr>
+                                	</thead>
+                                	<tbody>
+                                     {% for l2 in listap %}
+                                     <h3>Lista de Modulos en Proceso Educativo</h3>
+
+                                     <tr>
+                                         <td>
+                                         <form action="/notas/" method="post">
+                                             <select name="idmodulos" id="inputID" class="form-control" title="Selecciona un modulo">
+                                             	<option value="1"> {{l2.m_dulo1}}</option>
+                                                 <option value="2"> {{l2.m_dulo2}}</option>
+                                                 <option value="3"> {{l2.m_dulo3}}</option>
+                                                 <option value="4"> {{l2.m_dulo4}}</option>
+                                                 <option value="5"> {{l2.m_dulo5}}</option>
+                                                 <option value="6"> {{l2.m_dulo6}}</option>
+                                                 <option value="7"> {{l2.m_dulo7}}</option>
+                                                 <option value="8"> {{l2.m_dulo8}}</option>
+                                                 <option value="9"> {{l2.m_dulo9}}</option>
+                                                 <option value="10"> {{l2.m_dulo10}}</option>
+                                                 <option value="11"> {{l2.m_dulo11}}</option>
+                                                 <option value="12"> {{l2.m_dulo12}}</option>
+                                                 <option value="13"> {{l2.m_dulo13}}</option>
+                                                 <option value="14"> {{l2.m_dulo14}}</option>
+                                                 <option value="15"> {{l2.m_dulo15}}</option>
+                                                 <option value="16"> {{l2.m_dulo16}}</option>
+                                                 <option value="17"> {{l2.m_dulo17}}</option>
+                                                 <option value="18"> {{l2.m_dulo18}}</option>
+                                                 <option value="19"> {{l2.m_dulo19}}</option>
+                                                 <option value="20"> {{l2.m_dulo20}}</option>
+                                                 <option value="21"> {{l2.m_dulo21}}</option>
+                                                 <option value="22"> {{l2.m_dulo22}}</option>
+                                                 <option value="23"> {{l2.m_dulo23}}</option>
+                                                 <option value="24"> {{l2.m_dulo24}}</option>
+                                                 <option value="25"> {{l2.m_dulo25}}</option>
+                                                 <option value="26"> {{l2.m_dulo26}}</option>
+                                                 <option value="27"> {{l2.m_dulo27}}</option>
+                                                 <option value="28"> {{l2.m_dulo28}}</option>
+                                                 <option value="29"> {{l2.m_dulo29}}</option>
+                                                 <option value="30"> {{l2.m_dulo30}}</option>
+                                             </select>
+                                          <button type="submit" class="btn btn-success btn-block" name="idproceso" value="{{botonid}}"class="">Notas</button>
+                                        </form>
+                                         </td>
+                                     </tr>
+                                     <tr>
+
+                                         </td>
+                                         
+
+                                     </tr>
+
+
+
+                                	</tbody>
+
+                                     {% endfor %}
+
+                                </table>
+
+                            </div>
+ <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+
+
+            </div>
+
+                </div>
+	<footer>
+
+  <div class="container">
+    <p>Sistema SIE-CONEANFO <a href="http://www.coneanfo.hn/" rel="author"></a> Derechos Reservados @ 2017</p>
+  </div>
+</footer>
+</div>
+{% endblock %}

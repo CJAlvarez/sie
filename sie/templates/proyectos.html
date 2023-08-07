@@ -1,0 +1,185 @@
+{% extends "dashboard.html"%}
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {% block contenido %}
+<script src="https://use.fontawesome.com/2b7924f1a5.js"></script>
+
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+                <a class="btn btn-primary" data-toggle="modal" href="#modal-id">AGREGAR PROYECTOS</a>
+                <i  id="mostrar" class="fa fa-search" aria-hidden="true"><em>EDITAR CLICK AQUI</em></i>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="search" autocomplete="off" placeholder="Buscar Datos">
+
+                </div>
+               
+                <div class="modal fade" id="modal-id">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">FORMULARIO PROYECTOS</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+                                                    {% if messages %}
+                                                        <ul class="messages">
+                                                            {% for message in messages %}
+                                                            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        {% endif %}
+                                       <form action="/proyectos/" method="post"  enctype="multipart/form-data">
+                                                <table>
+                                                 <tr>
+                                                     <th>
+                                                         <label for="id_proyectoid">Proyectoid:</label>
+                                                     </th>
+                                                     <td>
+                                                         <input id="id_proyectoid" maxlength="20" name="proyectoid" type="text" value="{{ce}}{{a}}" required />
+                                                     </td>
+                                                 </tr>
+                                                    <tr>
+                                                        <th><label for="id_proyectonombre">Proyecto Nombre:</label></th><td><input id="id_proyectonombre" maxlength="200" name="proyectonombre" type="text" required /></td></tr>
+                                                    <tr><th><label for="id_proyectoobjetivo">Proyecto Objetivo:</label></th><td><textarea cols="40" id="id_proyectoobjetivo" name="proyectoobjetivo" rows="10" required>
+                                                    </textarea></td></tr>
+                                                    <tr><th><label for="id_proyectopresupuestoconeanfo">Proyecto presupuesto coneanfo:</label></th><td><input id="id_proyectopresupuestoconeanfo" name="proyectopresupuestoconeanfo" step="0.0001" type="number" /></td></tr>
+                                                    <tr><th><label for="id_proyectofechainicio">Proyecto fecha inicio:</label></th><td><input id="id_proyectofechainicio" maxlength="10" name="proyectofechainicio" type="text"/></td></tr>
+                                                    <tr><th><label for="id_proyectofechafinal">Proyecto fecha final:</label></th><td><input id="id_proyectofechafinal" maxlength="10" name="proyectofechafinal" type="text"/></td></tr>
+                                                    <tr><th><label for="id_donante">Donante:</label></th><td><input id="id_donante" maxlength="200" name="donante" type="text" /></td></tr>
+
+                                                </table>
+
+                                                <input type="submit" value="Guardar" class="btn btn-lg btn-primary btn-block">
+                                        </form>
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar Ventana</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+                <div class="table-responsive">
+                	<table id="mytable"class="table table-hover">
+                		<thead>
+                			<tr>
+                				<th>NOMBRE PROYECTO</th>
+                                <th>PRESUPUEST</th>
+                				<th>FECHA INICIAL</th>
+                				<th>FECHA FINAL</th>
+
+                			</tr>
+                		</thead>
+                		<tbody>
+                                {% for proyectos  in listaproyectos %}
+
+                			<tr>
+
+                				<td>{{proyectos.proyectonombre}}</td>
+                				<td>{{proyectos.proyectopresupuestoconeanfo}}</td>
+                                <td>{{proyectos.proyectofechainicio}}</td>
+                                <td>{{proyectos.proyectofechafinal}}</td>
+
+                             <td>
+                            <a href="{% url 'vista_editar_proyectos' proyectos.proyectoid%}"><button type="submit" class="btn btn-primary">EDITAR</button></a>
+                            </td>
+                                 <td>
+                            <a href="{% url 'vista_borrar_proyectos' proyectos.proyectoid%}"><button type="submit" class="btn btn-danger">ELIMINAR</button></a>
+                            </td>
+
+                        <td>
+
+                        </td>
+                			</tr>
+                                                {% endfor %}
+
+                		</tbody>
+                	</table>
+                </div>
+
+		<nav aria-label="...">
+  <ul class="pager">
+    <li>{% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">Anterior</a>
+        {% endif %}
+	</li>
+    <li>
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">Siguiente</a>
+        {% endif %}
+	</li>
+  </ul>
+</nav>
+            </div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+    <script type="text/javascript">
+$(function() {
+    $('#id_proyectofechainicio').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_proyectofechafinal').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+});
+</script>
+
+
+<script  type="text/javascript" >
+    $("button").hide();
+    $("#mostrar").click(function(){
+    $("button").show();
+    $("#mostrar").dblclick(function(){
+    $("button").hide();
+        });
+    });
+</script>
+
+
+
+
+
+         <script>
+
+   // When document is ready: this gets fired before body onload 🙂
+$(document).ready(function(){
+        // Write on keyup event of keyword input element
+        $("#search").keyup(function(){
+            // When value of the input is not blank
+            if( $(this).val() != "")
+            {
+                // Show only matching TR, hide rest of them
+                $("#mytable tbody>tr").hide();
+                $("#mytable td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+            }
+            else
+            {
+                // When there is no input or clean again, show everything back
+                $("#mytable  tbody>tr").show();
+            }
+        });
+    });
+    // jQuery expression for case-insensitive filter
+    $.extend($.expr[":"],
+    {
+        "contains-ci": function(elem, i, match, array)
+        {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
+
+
+        </script>
+	
+</div>
+
+	</div>
+{% endblock %}
+

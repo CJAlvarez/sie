@@ -1,0 +1,174 @@
+
+{% extends "dashboard.html"%}
+
+
+        {% block contenido %}
+
+
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+<strong>Elige una Opcion a Exportar</strong>
+
+</div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-8">
+        <table class="table table-hover" id="totaleshoras">
+            <thead>
+                <tr>
+                    <th>Nombre Modulos</th>
+                    <th>Total Horas Teoricas</th>
+                    <th>Total Horas Practicas</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                     {% for horas in valores %}
+                     <td> {{horas.modulo}}</td>
+                        <td><input type="text" id="horaspracticas"readonly="readonly" name="hp" value="{{horas.horaspractica}}" placeholder=""></td>
+                        <td><input type="number" id="horasteorica" readonly="readonly"name="ht" value="{{horas.horasteorica}}" placeholder=""></td>
+                        <td><input type="number" id="valores" readonly="readonly" name="t" value="{{horas.total_horas}}" placeholder=""></td>
+
+
+                </tr>
+            </tbody>
+        </table>
+            <h4>Lista de Notas</h4>
+                   
+{% endfor %}
+                <form action="/notasupdate/" method="post" enctype="multipart/form-data">
+
+            <table class="table table-bordered table-hover" id="tablavalores">
+            	<thead>
+            		<tr>
+            			<th>Identidad Participante </th>
+                        <th>Nombre Completo</th>
+                        <th>Horas Teoríca</th>
+                        <th>Hora Práctica</th>
+                        <th>Nota Teórica</th>
+                        <th>Nota Práctica</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+
+                {% for a in entries %}
+
+            		<tr>
+            			<td><input type="text" width="200" readonly name="identidad"  class="form-control" value="{{a.identidad}}" title="" ></td>
+                        <td>{{a.nombrecompleto}}</td>
+                        <td><input  type="number" min="0" max="100" name="horateorica" class="form-control" value="{{a.horasteoria}}" title="Ingrese Nota" ></td>
+                        <td><input type="number" min="0" max="100"name="horapractica" class="form-control" value="{{a.horapractica}}" title="Ingrese Nota" ></td>
+                        <td><input type="number" min="0"  max="100"name="notateorica"  class="form-control" value="{{a.notateorica}}" title="Ingrese Nota" ></td>
+                        <td><input type="number" pattern="{3}" title="Three letter country code"min="0" max="100" name="notapractica"  class="form-control" value="{{a.notapractica}}" title="Ingrese Nota" >
+
+                        </td>
+
+            		</tr>
+
+
+
+
+
+
+                {% endfor %}
+                    <td><input type="hidden" name="idproceso"  class="form-control" value="{{idproceso}}" title="" ></td>
+                    <td><input type="hidden" name="idmodulo"  class="form-control" value="{{idmodulos}}" title="" ></td>
+                    <button type="button" id="ht" class="btn btn-primary" disabled="">Guardar Notas</button>
+                    <button type="button" id="totald" class="btn btn-warning">Validar Horas</button>
+
+
+
+                 
+     <script>
+        $(document).ready(function(){
+        	
+        });
+
+        $("#ht").click(function(){
+            var iden = 0;
+            var num1 = 0;
+            var num2 = 0;
+            var num3 = 0;
+            var num4 = 0;
+            $('#tablavalores tbody tr').each(function(index, el) {
+                
+                 iden= $(this).find('td input[name="identidad"]').val();
+                 num1 = $(this).find('td input[name="horateorica"]').val();
+                 num2 = $(this).find('td input[name="horapractica"]').val();
+                 num3 = $(this).find('td input[name="notateorica"]').val();
+                 num4 = $(this).find('td input[name="notapractica"]').val();
+
+                $.post("/notasupdate/", {horateorica: num1,idproceso:"{{idproceso}}",idmodulo:"{{idmodulos}}",identidad:iden,horapractica:num2,'notateorica':num3,notapractica:num4})
+                    .done(function(index) {
+                    alert( "Modificacion Realizada" );
+          })
+                
+                    
+        });
+        });
+        
+</script>
+
+
+<script>
+        $(document).ready(function(){
+            
+        });
+
+        $("#totald").click(function(){
+            var horaspractica = 0;
+            var horasteoricas = 0;
+            var total =$("[name='t']").val();
+            var formvalid = true;
+            //alert(total)
+            //var num2 = 0;
+            //var num3 = 0;
+           // var num4 = 0;
+            $('#tablavalores tbody tr').each(function(index, el) {
+                 horasteoricas= $(this).find('td input[name="horateorica"]').val();
+                 horaspracticas = $(this).find('td input[name="horapractica"]').val();
+                 //alert(horaspractica)
+                 //alert(horasteoricas)
+                 //alert(total)
+                 totalh=parseInt(horasteoricas)+parseInt(horaspracticas)
+                 //alert(totalh)
+                                       
+
+         if (totalh > parseFloat(total))
+            formvalid = false;       
+        });
+
+            if (formvalid){
+                $('#ht').removeAttr('disabled'); 
+            }else{
+                alert("Advertencia:Horas practica tiene un valor mayor a el total de horas para este modulo corregir horas ");
+                $('#ht').attr("disabled","disabled");
+            }
+
+        });
+        
+</script>
+
+
+            	</ttbody>
+            </table>
+
+        </form>
+
+
+        <div id="cargaexterna"></div>
+    </div>
+
+
+
+</body>
+
+{% endblock %}
+
+
+
+</body>
+
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+

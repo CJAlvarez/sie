@@ -1,0 +1,38 @@
+
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+
+
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+
+</div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-primary">
+        	  <div class="panel-heading">
+        			<h3 class="panel-title">Editar Contraseña</h3>
+        	  </div>
+        	  <div class="panel-body">
+        			  <form action="" method="post"  enctype="multipart/form-data">
+            <table>
+                {{ formulario.as_table}}
+                <strong>Advertencia:</strong><h5>Si usted entro a esta opcion debe realizar el cambio de contraseña obligatorio sino se le bloqueara su cuenta</h5>
+
+            </table>
+            <input type="submit" value="Guardar" class="btn btn-lg btn-primary btn-block">
+        </form>
+        	  </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+</body>
+
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+

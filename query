@@ -1,0 +1,5 @@
+select  login_procesoeducativo.CD_NOMBRE,login_Evaluaciones.Numero_identidad,login_personas.Nombre_Completo
+,login_Evaluaciones.HorasTeoria1,login_Evaluaciones.HorasPractica1,login_Evaluaciones.NotaTeorica1,login_Evaluaciones.NotaPractica1
+ from login_Evaluaciones left join login_personas on login_Evaluaciones.Numero_identidad=login_Personas.Numero_identidad
+inner join login_procesoeducativo on login_procesoeducativo.Clave= login_Evaluaciones.ClaveEV
+where login_Evaluaciones.ClaveEV='ADMIN9864081'

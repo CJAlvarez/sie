@@ -1,0 +1,156 @@
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+
+
+
+
+
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 ">
+                    <form action="/seguimiento_parametro/" method="post" role="form">
+                    	<legend>OPCION EDUCATIVA</legend>
+                    
+                    	<div class="form-group">
+                    		<label for=""></label>
+                        <select name="id" id="idoe" class="form-control"><option value=""  class="form-control">ELIGE UNA OPCION</option>
+                             {% for opcion in educativa %}
+                                <option value="{{opcion.oe_id}}"  class="form-control">{{opcion.oe_opcioneducativa}}</option>
+                             {% endfor %}
+                        </select>    
+                    	</div>
+
+
+                        	<legend>PROCESO EDUCATIVO</legend>
+
+                    	<div class="form-group">
+                    		<label for=""></label>
+                        <select name="name" id="datar" class="form-control">
+                                <option value=""  class="form-control"></option>
+                        </select>
+                    	</div>
+
+                    
+                    	
+                    
+                    </form>
+            </div>
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 well">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>NOMBRE COMPLETO</th>
+                <th>DESERTO</th>
+                <th>FECHA DESERCION</th>
+                <th>CAUSA DESERCION</th>
+                <th>SOMETIDO A  CERTIFICACION</th>
+                <th>SE CERTIFICO</th>
+                <th>OBSERVACIONES</th>
+                <th>EGRESO</th>
+            </tr>
+        </thead>
+        <tbody id="tablaresultado">
+            <tr>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#idoe').change(function() {
+    var id = $("#idoe").val();{
+    //alert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_seguimientoparametro' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idproceso+'">'+data[i].nombreproceso+'</option>'}
+    $('#datar').html(html);
+    }
+    });
+    };
+    })});
+</script>
+ <script type="text/javascript">
+    $(function(){
+    $('#datar').change(function() {
+    var id = $("#datar").val();{
+    //alert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_seguimientoparametro2' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+
+    var html=""
+    for(var i = 0; i<data.length ; i++){
+	 if (data[i].deserto == true)
+            var deserto="si";
+     else
+         var deserto="no";
+     if (data[i].causa ==1)
+         var a="Cambio de Domicilio";
+	 else if (data[i].causa ==2)
+	 	var a="Migró a la Ciudad";
+	 else if (data[i].causa ==0)
+	     var a="Ninguno";
+	 else if (data[i].causa ==3)
+	     var a="Migró a otro país";
+ 	 else if (data[i].causa ==4)
+	     var a="Muerte Familiar Cercano";
+	 else if (data[i].causa ==5)
+	     var a="Desmotivación";
+	 else if (data[i].causa ==6)
+	     var a="Otras";
+	 if (data[i].sometido == true)
+            var sometido="si";
+     else
+         var sometido="no";
+
+     if (data[i].certifico == true)
+            var certifico="si";
+     else
+         var certifico="no";
+        //html += "<table><thead><tr><th>Nombre Completo</th><th>Deserto</th><th>Fecha Deserción</th><th>Causa Deserción</th><th>Sometido a Certificación</th><th>Se Certifico</th><th>Observaciones</th><th>Egreso</th></tr></thead><tbody><tr><td>"+data[i].nombrecompleto+"</td><td>"+deserto+"</td><td>"+data[i].fechadesercion+"</td><td>"+a+"</td><td>"+sometido+"</td><td>"+certifico+"</td><td>"+data[i].observaciones+"</td><td>"+data[i].egreso+"</td><td><a class='btn btn-primary' href='/modificar_personasporproceso/"+data[i].pk+"'>Modificar</a></td></tr></tbody></table>"}
+            html += "<tr><td>"+data[i].nombrecompleto+"</td><td>"+deserto+"</td><td>"+data[i].fechadesercion+"</td><td>"+a+"</td><td>"+sometido+"</td><td>"+certifico+"</td><td>"+data[i].observaciones+"</td><td>"+data[i].egreso+"</td><td><a class='btn btn-primary' href='/modificar_personasporproceso/"+data[i].pk+"'>EDITAR</a></td></tr>"}
+
+    $('#tablaresultado').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+<script>
+$(document).ready(function() {
+    $('f').DataTable();
+} );
+				</script>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+{% endblock %}
+

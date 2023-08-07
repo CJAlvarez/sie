@@ -1,0 +1,572 @@
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 ">
+         <script src="https://use.fontawesome.com/2b7924f1a5.js"></script>
+
+
+                                                 NUMERO DE PARTICIPANTES:<strong>{{conte}}</strong><br>
+
+
+                <a class="btn btn-primary" data-toggle="modal" href="#modal-id">AGREGAR  PARTICIPANTES</a>
+                                 <i  id="mostrar" class="fa fa-search" aria-hidden="true"> <em>EDITAR CLLICK AQUI</em></i>
+
+
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="search" autocomplete="off" placeholder="Buscar Datos">
+
+                </div>
+                
+                <div class="modal fade" id="modal-id">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">FORMULARIO PARTICIPANTES</h4>
+                                                    <h5 id="identidadbusqueda"></h5>
+
+                             </div>
+                            <div class="modal-body">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    {% if messages %}
+                                                        <ul class="messages">
+                                                            {% for message in messages %}
+                                                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        {% endif %}
+                                      <table>
+                                          <form action="/personas/" method="post"  enctype="multipart/form-data">
+                                             <table>
+                                                {% for field in form %}
+                                                                    {{ field.errors }}
+       
+   
+                                    {% endfor %}
+
+                                                 <tr>
+                                                     <th>
+                                                         <label for="id_clavececap">Clavececap:</label>
+                                                     </th>
+                                                     <td>
+                                                         <input id="id_clavececap" readonly="readonly" class="form-control" maxlength="10" name="clavececap" type="text" value="{{ce}}"/>
+                                                     </td>
+                                                 </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="id_numero_identidad">Numero identidad:</label>
+                                                    </th>
+                                                    <td>
+                                                        <input required="required" id="searchidentidad" maxlength="13"class="form-control" title="Ingrese Numero menor 13 digitos" name="numero_identidad" type="text" required />
+                                                        <h5>*Campo Requerido</h5>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="id_nombre_completo">Nombre completo:</label>
+                                                    </th>
+                                                    <td>
+                                                        <input required="required" id="id_nombre_completo" maxlength="80"  class="form-control" name="nombre_completo" type="text" required />
+                                                         <h5>*Campo Requerido</h5>
+
+                                                    </td>
+                                                </tr>
+                                                <tr><th><label for="id_fecha_de_nacimiento">Fecha de nacimiento:</label></th><td><input required="required" id="id_fecha_de_nacimiento" class="form-control" name="fecha_de_nacimiento" type="text" required/></td></tr>
+                                                <tr>
+                                                    <th>
+                                                        Edad en años
+                                                    </th>
+
+                                                    <td>
+                                                            <input required="required" id="id_edadentprogramaa_os" name="edadentroprogramaa_os" value="" title="" class="form-control" required="required" type="text">
+                                                <h5>*Campo Requerido</h5>
+           
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                     <th>
+                                                        Edad en Meses
+                                                    </th>
+
+                                                    <td>
+                                                        <input  required="required" id="id_edadentroprogramameses" name="edadentroprogramameses" class="form-control" type="text" value="">
+                                                                        <h5>*Campo Requerido</h5>
+                                    
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="id_sexo">Sexo:</label>
+                                                    </th>
+                                                    <td>
+
+                                                        <select required="required" class="form-control" name="sexo" id="id_sexo" class="form-control">
+                                                        	<option value="Masculino"> -- Masculino -- </option>
+                                                            <option value="Femenino"> -- Femenino -- </option>
+                                                        </select>
+                                                        <h5>*Campo Requerido</h5>
+
+                                                    </td>
+                                                </tr>
+                                                <tr><th><label for="id_domicilio">Domicilio:</label></th><td><input required="required" class="form-control" id="id_domicilio" maxlength="50" name="domicilio" type="text" />
+                                                        <h5>*Campo Requerido</h5>
+
+                                                </td></tr>
+                                                <tr>
+                                                    <th>
+                                                        <label for="id_dep">Departamento:</label>
+                                                    </th>
+                                                    <td>
+                                                        <select required="required" id="id_dep" name="dep" class="form-control">
+                                                            <option value="" selected="selected">Seleccione Departamento</option> 
+                                                            {% for d in departamentos%}
+                                                            <option value="{{d.dep_id}}" selected="selected">{{d.dep_departamento}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                </select>
+                                                        <h5>*Campo Requerido</h5>
+                                                    
+                                                    </td>
+                                                </tr>
+                                            <tr><th><label for="id_mun">Municipio:</label></th><td><select class="form-control" id="id_mun" name="mun">
+                                            <option  value="" selected="selected">---------</option>
+
+                                            </select>
+
+                                                        <h5>*Campo Requerido</h5>
+
+
+                                        </td></tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="id_aldea">Aldea:</label>
+                                                </th>
+                                                <td>
+                                                    <select  id="id_aldea" class="form-control" name="aldea">
+                                                            <option value="" selected="selected">---------</option>
+                                                        </select>
+                                                        <h5>*Campo Requerido</h5>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="id_caserio">Caserio:</label>
+                                                </th>
+                                                 <td>
+                                                     <select  id="id_caserio" class="form-control" name="caserio">
+                                                            <option value="">---------</option>
+                                                     </select>
+                                                        <h5>*Campo Requerido</h5>
+
+                                                 </td>
+                                            </tr>
+                                            <tr><th><label for="id_tel_fono">Telefono:</label></th><td><input id="id_tel_fono"  class="form-control" maxlength="10" name="tel_fono" type="text" /></td></tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="id_ec">Estado Civil:</label>
+                                                </th>
+
+                                                <td>
+                                                        <select  id="id_ec" name="ec" class="form-control">
+
+
+                                                                        <option value="" selected="selected">---------</option>
+                                                                            {% for es in estado %}
+                                                                        <option value="{{es.ec_id}}">{{es.ec_estadocivil}}</option>
+                                                                            {% endfor %}
+
+                                                                </select>
+                                                                                                                        <h5>*Campo Requerido</h5>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+
+                                            </tr><th> ¿Cual es su Nacionalidad?</th>
+                                            <td>
+                                              <select  id="na" name="na" class="form-control">
+                                                                        <option value="" selected="selected">---------</option>
+                                                                            {% for na in nacionalidad %}
+                                                                        <option value="{{na.nac_id}}">{{na.nac_nacionalidad}}</option>
+                                                                            {% endfor %}
+
+                                                                </select>
+
+
+                                                        <h5>*Campo Requerido</h5>
+
+                                            </td>
+                                            <tr>
+                                                <th>
+                                                    <label for="id_esta_estudiando">¿Esta estudiando en el sistema formal?:</label>
+                                                </th>
+                                                <td>
+                                                   
+
+                                                      <select id="id_esta_estudiando" name="esta_estudiando" class="form-control">
+                                                                        <option value="" selected="selected">---------</option>
+                                                                            {% for es in estudiando %}
+                                                                        <option value="{{es.estdudia_id}}">{{es.estudia}}</option>
+                                                                            {% endfor %}
+
+                                                                </select>
+                                                        <h5>*Campo Requerido</h5>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="id_tiene_alguna_discapacidad">¿Tiene alguna discapacidad?:</label>
+                                                </th>
+                                                <td>
+                                                     <select id="id_tiene_alguna_discapacidad" name="tiene_alguna_discapacidad" id="inputID" class="form-control">
+                                                              {% for dis in discapacidad %}
+                                                                        <option value="{{dis.discapacidad_id}}">{{dis.discapacidad}}</option>
+                                                                            {% endfor %}
+
+                                                    </select>
+                                                        <h5>*Campo Requerido</h5>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="id_ne">Nivel Educativo:</label>
+                                                </th>
+                                                <td>
+                                                    <select  id="id_ne"  class="form-control" name="ne">
+                                                    <option value=""selected="selected">---------</option>
+                                                        {% for catn in niveleducativo %}
+                                                        <option value="{{catn.ne_id}}">{{catn.ne_niveleducativo}}</option>
+                                                            {% endfor %}
+
+                                                    </select>
+                                                        <h5>*Campo Requerido</h5>
+
+                                                </td>
+                                           
+                                            </tr>
+                                            <tr><th><label for="id_grado_alcanzado">Grado alcanzado:</label></th>
+                                                <td>
+
+                                                           <input type="text" name="ed_gradoalcanzado" id="id_ed_gradoalcanzado" class="form-control" value=""   title="">
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <label for="id_et">Etnia:</label>
+                                                </th>
+                                                <td>
+                                                    <select  id="id_et" name="et" class="form-control">
+                                                    <option value="" selected="selected">---------</option>
+                                                        {% for et in etnia %}
+                                                        <option value="{{et.et_id}}">{{et.et_nombreetnia}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                                                                        <h5>*Campo Requerido</h5>
+
+                                                </td>
+                                                
+
+                                            </tr>
+                                            <tr><th><label for="id_nombrereposnsable1">Nombrereposnsable1:</label></th><td><input  class="form-control" id="id_nombrereposnsable1" maxlength="50" name="nombrereposnsable1" type="text" /></td></tr>
+                                            <tr><th><label for="id_idresponsable1">Idresponsable1:</label></th><td><input  class="form-control" id="id_idresponsable1" maxlength="15" name="idresponsable1" type="text" /></td></tr>
+                                            <tr><th><label for="id_ocupacionresponsable1">Ocupacionresponsable1:</label></th><td><input   class="form-control"id="id_ocupacionresponsable1" maxlength="50" name="ocupacionresponsable1" type="text" /></td></tr>
+                                            <tr><th><label for="id_nivelacademicoresponsable1">Nivelacademicoresponsable1:</label></th><td><input  class="form-control" id="id_nivelacademicoresponsable1" name="nivelacademicoresponsable1" type="text" /></td></tr>
+                                            <tr><th><label for="id_parentesco1">Parentesco1:</label></th><td><input  class="form-control" id="id_parentesco1" maxlength="50" name="parentesco1" type="text" /></td></tr>
+                                            <tr><th><label for="id_nombrereposnsable2">Nombrereposnsable2:</label></th><td><input   class="form-control" id="id_nombrereposnsable2" maxlength="50" name="nombrereposnsable2" type="text" /></td></tr>
+                                            <tr><th><label for="id_idresponsable2">Idresponsable2:</label></th><td><input   class="form-control" id="id_idresponsable2" maxlength="15" name="idresponsable2" type="text" /></td></tr>
+                                            <tr><th><label for="id_ocupacionresponsable2">Ocupacionresponsable2:</label></th><td><input   class="form-control" id="id_ocupacionresponsable2" maxlength="50" name="ocupacionresponsable2" type="text" /></td></tr>
+                                            <tr><th><label for="id_nivelacademicoresponsable2">Nivelacademicoresponsable2:</label></th><td><input  class="form-control"  id="id_nivelacademicoresponsable2" name="nivelacademicoresponsable2" type="text" /></td></tr>
+                                            <tr><th><label for="id_parentesco2">Parentesco2:</label></th><td><input id="id_parentesco2"  class="form-control"  maxlength="50" name="parentesco2" type="text" /></td></tr>
+                                            <tr><th><label for="id_lasteditdate">Fecha Ingreso:</label></th><td><input required="required" id="id_lasteditdate"  class="form-control"  name="lasteditdate" type="text" required />
+
+                                                        <h5>*Campo Requerido</h5>
+
+                                            </td></tr>
+                                            <tr><th><label for="id_creationdate">Fecha Creacion:</label></th><td><input required="required" id="id_creationdate"  class="form-control" name="creationdate" type="text"required />
+                                                        <h5>*Campo Requerido</h5>
+
+                                            </td></tr>
+
+                                    </table>
+
+                                                <input id="bloqueo" type="submit" value="Guardar" class="btn btn-lg btn-primary btn-block">
+
+                                    </table>
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar Ventana</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <table id="mytable"class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>IDENTIDAD</th>
+                        <th>NOMBRE PRESONA</th>
+                        <th>FECHA CREACION</th>
+                        <th>DEPARTAMENTO</th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for personas in contacts %}
+
+                    <tr>
+                        <td>{{personas.numero_identidad}}</td>
+                        <td>{{personas.nombre_completo}}</td>
+                        <td>{{personas.creationdate|date:"Y-m-d "}}</td>
+                        <td>{{personas.dep}}</td>
+
+                       <!-- <td> {% if staffeducadores.ed_sexo == "1" %}
+                        Femenino
+                        {% elif staffeducadores.ed_sexo == "2" %}
+                        Masculino
+                        {% endif %}
+                        </td>
+                        -->
+
+
+
+                             <td>
+                            <a href="{% url 'vista_editar_participantes' personas.pk %}"><button type="submit" class="btn btn-primary">EDITAR</button></a>
+                            </td>
+
+                        <td>
+                            <a href="{% url 'vista_borrar_participantes' personas.pk %}"><button type="submit" class="btn btn-danger">BORRAR</button></a>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ contacts.number }} de {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </span>
+</div>
+<div id="resultado"></div>
+		<nav aria-label="...">
+
+</nav>
+            </div>
+
+<script  type="text/javascript" >
+    $("button").hide();
+    $("#mostrar").click(function(){
+    $("button").show();
+    $("#mostrar").dblclick(function(){
+    $("button").hide();
+        });
+    });
+</script>
+
+ <script>
+            $(document).ready(function(){
+                    // Write on keyup event of keyword input element
+                    $("#search").keyup(function(){
+                        // When value of the input is not blank
+                        if( $(this).val() != "")
+                        {
+                            // Show only matching TR, hide rest of them
+                            $("#mytable tbody>tr").hide();
+                            $("#mytable td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+                        }
+                        else
+                        {
+                            // When there is no input or clean again, show everything back
+                            $("#mytable  tbody>tr").show();
+                        }
+                    });
+                });
+                // jQuery expression for case-insensitive filter
+                $.extend($.expr[":"],
+                {
+                    "contains-ci": function(elem, i, match, array)
+                    {
+                        return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                    }
+                });
+
+        </script>
+
+<script type="text/javascript">
+    $(function(){
+    $('#id_fecha_de_nacimiento').change(function() {
+    var fecha = $("#id_fecha_de_nacimiento").val();{
+   // alert(fecha)
+    $.ajax({
+    data:{'fecha':fecha},
+    url:'{% url 'calcular_edad' %}',
+    type:'post',
+    success: function(data){
+
+    //alert(data);
+    //console.log(data);
+    var html=""
+    for(var i = 0; i<data.length ; i++){
+    html += ''+data[0].edad_numerica+''+data[i].edad_meses+''}
+    $("#id_edadentprogramaa_os").val(data[0].edad_numerica);
+    $("#id_edadentroprogramameses").val(data[0].edad_meses);
+
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_dep').change(function() {
+    var id = $("#id_dep").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].pk+'">'+data[i].mun_municipio+'</option>'}
+    $('#id_mun').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_mun').change(function() {
+    var id = $("#id_mun").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_al' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idaldea+'">'+data[i].nombrealdea+'</option>'}
+    $('#id_aldea').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_aldea').change(function() {
+    var id = $("#id_aldea").val();{
+      //  alert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_ca' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idcaserio+'">'+data[i].nombrecaserio+'</option>'}
+    $('#id_caserio').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $('#id_fecha_de_nacimiento').datepicker({
+      dateFormat: 'yy-mm-dd',
+      defaultDate: "+2m"
+    });
+      $('#id_lasteditdate').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_creationdate').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+});
+</script>
+ <script type="text/javascript">
+    $(function(){
+    $('#searchidentidad').keyup(function() {
+    var identidad = $("#searchidentidad").val();{
+    $.ajax({
+    data:{'identidad':identidad},
+    url:'{% url 'vista_busquedadidentidad' %}',
+    type:'post',
+    success: function(data){
+    //console.log(data);
+
+    var html=""
+    for(var i = 0; i<data.length ; i++){
+    html += data[i].numero_identidad+'<br>'+data[i].nombre_completo+'<br>'+'<strong>Usuario Existente</strong>'}
+    $('#identidadbusqueda').html(html);
+
+    var count = $("#identidadbusqueda").children().length;
+
+    if (count==0){
+        $('#bloqueo').removeAttr('disabled');
+    }else{
+        alert("Usuario Existente ");
+        $('#bloqueo').attr('disabled', 'disabled');
+                   
+    }
+
+    /*var ex=$('#identidadbusqueda').attr('data-target');
+     
+    if(ex === 'true'){
+        alert("Si existe usuario");
+        $('#bloqueo').attr('disabled', 'disabled');
+
+    }else{
+                alert("No existe");
+                $('#bloqueo').attr('disabled', '');
+
+
+    }*/
+
+
+
+    }
+    });
+    };
+    })});
+</script>
+
+
+
+	</div>
+{% endblock %}
+

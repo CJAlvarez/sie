@@ -1,0 +1,879 @@
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+<script src="https://use.fontawesome.com/2b7924f1a5.js"></script>
+
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 ">
+
+                <a class="btn btn-primary" data-toggle="modal" href="#modal-id">AGREGAR MODULOS</a>
+                                 <i  id="mostrar" class="fa fa-search" aria-hidden="true"> <em>EDITAR CLICK AQUI</em></i>
+
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="search" autocomplete="off" placeholder="BUSCAR">
+
+                </div>
+            
+                <div class="modal fade" id="modal-id">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">FORMULARIO MODULOS</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    {% if messages %}
+                                                        <ul class="messages">
+                                                            {% for message in messages %}
+                                                            <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        {% endif %}
+                                      <table>
+                                           <form action="/modulos/" method="post"  enctype="multipart/form-data">
+                                            <table>
+                                                  <tr>
+                                                      <th>
+                                                          <label for="id_claveev">CLAVE EV:</label>
+                                                      </th>
+                                                      <td>
+                                                          <select class="form-control" id="id_claveev" name="claveev" required>
+                                                              <option value="" selected="selected">---------</option>
+                                                              {% for a in proceso2 %}
+                                                                <option id="valor"  data-horatotal="{{a.Total_Horas}} "value="{{a.clave}}">{{a.Nombre_Proceso}}</option>
+                                                              {% endfor %}
+
+                                                           </select>
+                                                      </td>
+                                                  </tr>
+
+                                        <tr><th><label for="id_m_dulo1">Modulo1:</label></th><td><input class="form-control" id="id_m_dulo1" maxlength="100" name="m_dulo1" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod1">Fechainiciomod1:</label></th><td><input class="form-control" id="id_fechainiciomod1" name="fechainiciomod1" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod1">Fechafinalmod1:</label></th><td><input class="form-control" id="id_fechafinalmod1" name="fechafinalmod1" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas1">Horasteoricas1:</label></th><td><input data-hora=""  class="form-control" id="id_horasteoricas1" maxlength="100" name="horasteoricas1" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas1">Horaspracticas1:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas1" maxlength="100" name="horaspracticas1" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod1">Instructormod1:</label></th><td>
+                                            <select class="form-control" id="id_instructormod1" name="instructormod1">
+                                            <option value="" selected="selected">---------</option>
+                                            {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo2">Modulo2:</label></th><td><input class="form-control" id="id_m_dulo2" maxlength="100" name="m_dulo2" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod2">Fechainiciomod2:</label></th><td><input class="form-control" id="id_fechainiciomod2" name="fechainiciomod2" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod2">Fechafinalmod2:</label></th><td><input class="form-control" id="id_fechafinalmod2" name="fechafinalmod2" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas2">Horasteoricas2:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas2" maxlength="100" name="horasteoricas2" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas2">Horaspracticas2:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas2" maxlength="100" name="horaspracticas2" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod2">Instructormod2:</label></th><td><select class="form-control" id="id_instructormod2" name="instructormod2">
+                                        <option value="" selected="selected">---------</option>
+                                       <option value="" selected="selected">---------</option>
+                                            {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo3">Modulo3:</label></th><td><input class="form-control" id="id_m_dulo3" maxlength="100" name="m_dulo3" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod3">Fechainiciomod3:</label></th><td><input class="form-control" id="id_fechainiciomod3" name="fechainiciomod3" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod3">Fechafinalmod3:</label></th><td><input class="form-control" id="id_fechafinalmod3" name="fechafinalmod3" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas3">Horasteoricas3:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas3" maxlength="100" name="horasteoricas3" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas3">Horaspracticas3:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas3" maxlength="100" name="horaspracticas3" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod3">Instructormod3:</label></th><td><select class="form-control" id="id_instructormod3" name="instructormod3">
+                                        <option class="form-control" value="" selected="selected">---------</option>
+                                        <option value="" selected="selected">---------</option>
+                                            {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo4">Modulo4:</label></th><td><input id="id_m_dulo4"class="form-control" maxlength="100" name="m_dulo4" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod4">Fechainiciomod4:</label></th><td><input class="form-control"id="id_fechainiciomod4" name="fechainiciomod4" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod4">Fechafinalmod4:</label></th><td><input class="form-control"id="id_fechafinalmod4" name="fechafinalmod4" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas4">Horasteoricas4:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas4" maxlength="100" name="horasteoricas4" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas4">Horaspracticas4:</label></th><td><input data-hora="" class="form-control"id="id_horaspracticas4" maxlength="100" name="horaspracticas4" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod4">Instructormod4:</label></th><td><select class="form-control" id="id_instructormod4" name="instructormod4">
+                                        <option value="" selected="selected">---------</option>
+                                            {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo5">Modulo5:</label></th><td><input class="form-control" id="id_m_dulo5" maxlength="100" name="m_dulo5" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod5">Fechainiciomod5:</label></th><td><input class="form-control" id="id_fechainiciomod5" name="fechainiciomod5" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod5">Fechafinalmod5:</label></th><td><input class="form-control" id="id_fechafinalmod5" name="fechafinalmod5" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas5">Horasteoricas5:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas5" maxlength="100" name="horasteoricas5" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas5">Horaspracticas5:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas5" maxlength="100" name="horaspracticas5" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod5">Instructormod5:</label></th><td><select class="form-control" id="id_instructormod5" name="instructormod5">
+                                        <option value="" selected="selected">---------</option>
+                                            {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo6">Modulo6:</label></th><td><input class="form-control" id="id_m_dulo6" maxlength="100" name="m_dulo6" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod6">Fechainiciomod6:</label></th><td><input class="form-control" id="id_fechainiciomod6" name="fechainiciomod6" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod6">Fechafinalmod6:</label></th><td><input class="form-control" id="id_fechafinalmod6" name="fechafinalmod6" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas6">Horasteoricas6:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas6" maxlength="100" name="horasteoricas6" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas6">Horaspracticas6:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas6" maxlength="100" name="horaspracticas6" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod6">Instructormod6:</label></th><td><select class="form-control" id="id_instructormod6" name="instructormod6">
+                                        <option value="" selected="selected">---------</option>
+                                            {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo7">Modulo7:</label></th><td><input class="form-control" id="id_m_dulo7" maxlength="100" name="m_dulo7" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod7">Fechainiciomod7:</label></th><td><input class="form-control" id="id_fechainiciomod7" name="fechainiciomod7" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod7">Fechafinalmod7:</label></th><td><input class="form-control" id="id_fechafinalmod7" name="fechafinalmod7" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas7">Horasteoricas7:</label></th><td><input data-hora="" class="form-control"id="id_horasteoricas7" maxlength="100" name="horasteoricas7" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas7">Horaspracticas7:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas7" maxlength="100" name="horaspracticas7" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod7">Instructormod7:</label></th><td><select class="form-control" id="id_instructormod7" name="instructormod7">
+                                        <option value="" selected="selected">---------</option>
+                                        {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo8">Modulo8:</label></th><td><input class="form-control" id="id_m_dulo8" maxlength="100" name="m_dulo8" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod8">Fechainiciomod8:</label></th><td><input class="form-control" id="id_fechainiciomod8" name="fechainiciomod8" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod8">Fechafinalmod8:</label></th><td><input class="form-control" id="id_fechafinalmod8" name="fechafinalmod8" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas8">Horasteoricas8:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas8" maxlength="100" name="horasteoricas8" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas8">Horaspracticas8:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas8" maxlength="100" name="horaspracticas8" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod8">Instructormod8:</label></th><td><select class="form-control" id="id_instructormod8" name="instructormod8">
+                                        <option value="" selected="selected">---------</option>
+                                    {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo9">Modulo9:</label></th><td><input class="form-control" id="id_m_dulo9" maxlength="100" name="m_dulo9" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod9">Fechainiciomod9:</label></th><td><input class="form-control" id="id_fechainiciomod9" name="fechainiciomod9" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod9">Fechafinalmod9:</label></th><td><input class="form-control" id="id_fechafinalmod9" name="fechafinalmod9" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas9">Horasteoricas9:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas9" maxlength="100" name="horasteoricas9" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas9">Horaspracticas9:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas9" maxlength="100" name="horaspracticas9" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod9">Instructormod9:</label></th><td><select class="form-control" id="id_instructormod9" name="instructormod9">
+                                        <option value="" selected="selected">---------</option>
+                                          {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo10">Modulo10:</label></th><td><input class="form-control" id="id_m_dulo10" maxlength="100" name="m_dulo10" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod10">Fechainiciomod10:</label></th><td><input class="form-control" id="id_fechainiciomod10" name="fechainiciomod10" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod10">Fechafinalmod10:</label></th><td><input class="form-control" id="id_fechafinalmod10" name="fechafinalmod10" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas10">Horasteoricas10:</label></th><td><input data-hora=""class="form-control" id="id_horasteoricas10" maxlength="100" name="horasteoricas10" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas10">Horaspracticas10:</label></th><td><input data-hora="" class="form-control"id="id_horaspracticas10" maxlength="100" name="horaspracticas10" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod10">Instructormod10:</label></th><td><select class="form-control" id="id_instructormod10" name="instructormod10">
+                                        <option value="" selected="selected">---------</option>
+                                         {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo11">Modulo11:</label></th><td><input class="form-control" id="id_m_dulo11" maxlength="100" name="m_dulo11" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod11">Fechainiciomod11:</label></th><td><input class="form-control" id="id_fechainiciomod11" name="fechainiciomod11" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod11">Fechafinalmod11:</label></th><td><input class="form-control" id="id_fechafinalmod11" name="fechafinalmod11" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas11">Horasteoricas11:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas11" maxlength="100" name="horasteoricas11" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas11">Horaspracticas11:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas11" maxlength="100" name="horaspracticas11" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod11">Instructormod11:</label></th><td><select class="form-control" id="id_instructormod11" name="instructormod11">
+                                        <option value="" selected="selected">---------</option>
+                                       {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo12">Modulo12:</label></th><td><input class="form-control" id="id_m_dulo12" maxlength="100" name="m_dulo12" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod12">Fechainiciomod12:</label></th><td><input class="form-control" id="id_fechainiciomod12" name="fechainiciomod12" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod12">Fechafinalmod12:</label></th><td><input class="form-control" id="id_fechafinalmod12" name="fechafinalmod12" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas12">Horasteoricas12:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas12" maxlength="100" name="horasteoricas12" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas12">Horaspracticas12:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas12" maxlength="100" name="horaspracticas12" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod12">Instructormod12:</label></th><td><select class="form-control" id="id_instructormod12" name="instructormod12">
+                                        <option value="" selected="selected">---------</option>
+                                       {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo13">Modulo13:</label></th><td><input class="form-control" id="id_m_dulo13" maxlength="100" name="m_dulo13" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod13">Fechainiciomod13:</label></th><td><input class="form-control" id="id_fechainiciomod13" name="fechainiciomod13" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod13">Fechafinalmod13:</label></th><td><input class="form-control" id="id_fechafinalmod13" name="fechafinalmod13" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas13">Horasteoricas13:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas13" maxlength="100" name="horasteoricas13" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas13">Horaspracticas13:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas13" maxlength="100" name="horaspracticas13" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod13">Instructormod13:</label></th><td><select class="form-control" id="id_instructormod13" name="instructormod13">
+                                        <option value="" selected="selected">---------</option>
+                                     {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo14">Modulo14:</label></th><td><input class="form-control" id="id_m_dulo14" maxlength="100" name="m_dulo14" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod14">Fechainiciomod14:</label></th><td><input class="form-control" id="id_fechainiciomod14" name="fechainiciomod14" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod14">Fechafinalmod14:</label></th><td><input  class="form-control" id="id_fechafinalmod14" name="fechafinalmod14" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas14">Horasteoricas14:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas14" maxlength="100" name="horasteoricas14" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas14">Horaspracticas14:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas14" maxlength="100" name="horaspracticas14" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod14">Instructormod14:</label></th><td><select class="form-control" id="id_instructormod14" name="instructormod14">
+                                        <option value="" selected="selected">---------</option>
+                                         {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo15">Modulo15:</label></th><td><input class="form-control" id="id_m_dulo15" maxlength="100" name="m_dulo15" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod15">Fechainiciomod15:</label></th><td><input class="form-control" id="id_fechainiciomod15" name="fechainiciomod15" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod15">Fechafinalmod15:</label></th><td><input class="form-control" id="id_fechafinalmod15" name="fechafinalmod15" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas15">Horasteoricas15:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas15" maxlength="100" name="horasteoricas15" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas15">Horaspracticas15:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas15" maxlength="100" name="horaspracticas15" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod15">Instructormod15:</label></th><td><select class="form-control" id="id_instructormod15" name="instructormod15">
+                                        <option value="" selected="selected">---------</option>
+                                        {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+
+                                        <tr><th><label for="id_m_dulo16">Modulo16:</label></th><td><input class="form-control" id="id_m_dulo16" maxlength="100" name="m_dulo16" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod16">Fechainiciomod16:</label></th><td><input class="form-control" id="id_fechainiciomod16" name="fechainiciomod16" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod16">Fechafinalmod16:</label></th><td><input class="form-control" id="id_fechafinalmod16" name="fechafinalmod16" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas16">Horasteoricas16:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas16" maxlength="100" name="horasteoricas16" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas16">Horaspracticas16:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas16" maxlength="100" name="horaspracticas16" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod16">Instructormod16:</label></th><td><select class="form-control" id="id_instructormod16" name="instructormod16">
+                                        <option value="" selected="selected">---------</option>
+                                       {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo17">Modulo17:</label></th><td><input class="form-control" id="id_m_dulo17" maxlength="100" name="m_dulo17" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod17">Fechainiciomod17:</label></th><td><input class="form-control" id="id_fechainiciomod17" name="fechainiciomod17" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod17">Fechafinalmod17:</label></th><td><input class="form-control" id="id_fechafinalmod17" name="fechafinalmod17" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas17">Horasteoricas17:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas17" maxlength="100" name="horasteoricas17" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas17">Horaspracticas17:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas17" maxlength="100" name="horaspracticas17" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod17">Instructormod17:</label></th><td><select class="form-control" id="id_instructormod17" name="instructormod17">
+                                        <option value="" selected="selected">---------</option>
+                                     {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo18">Modulo18:</label></th><td><input class="form-control" id="id_m_dulo18" maxlength="100" name="m_dulo18" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod18">Fechainiciomod18:</label></th><td><input class="form-control" id="id_fechainiciomod18" name="fechainiciomod18" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod18">Fechafinalmod18:</label></th><td><input class="form-control" id="id_fechafinalmod18" name="fechafinalmod18" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas18">Horasteoricas18:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas18" maxlength="100" name="horasteoricas18" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas18">Horaspracticas18:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas18" maxlength="100" name="horaspracticas18" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod18">Instructormod18:</label></th><td><select class="form-control" id="id_instructormod18" name="instructormod18">
+                                        <option value="" selected="selected">---------</option>
+                                         {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo19">Modulo19:</label></th><td><input class="form-control" id="id_m_dulo19" maxlength="100" name="m_dulo19" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod19">Fechainiciomod19:</label></th><td><input class="form-control" id="id_fechainiciomod19" name="fechainiciomod19" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod19">Fechafinalmod19:</label></th><td><input class="form-control" id="id_fechafinalmod19" name="fechafinalmod19" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas19">Horasteoricas19:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas19" maxlength="100" name="horasteoricas19" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas19">Horaspracticas19:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas19" maxlength="100" name="horaspracticas19" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod19">Instructormod19:</label></th><td><select class="form-control" id="id_instructormod19" name="instructormod19">
+                                        <option value="" selected="selected">---------</option>
+                                   {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo20">Modulo20:</label></th><td><input  class="form-control" id="id_m_dulo20" maxlength="100" name="m_dulo20" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod20">Fechainiciomod20:</label></th><td><input class="form-control" id="id_fechainiciomod20" name="fechainiciomod20" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod20">Fechafinalmod20:</label></th><td><input class="form-control" id="id_fechafinalmod20" name="fechafinalmod20" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas20">Horasteoricas20:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas20" maxlength="100" name="horasteoricas20" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas20">Horaspracticas20:</label></th><td><input data-hora="" class="form-control"id="id_horaspracticas20" maxlength="100" name="horaspracticas20" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod20">Instructormod20:</label></th><td><select class="form-control"  id="id_instructormod20" name="instructormod20">
+                                        <option value="" selected="selected">---------</option>
+                                        {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo21">Modulo21:</label></th><td><input class="form-control" id="id_m_dulo21" maxlength="100" name="m_dulo21" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod21">Fechainiciomod21:</label></th><td><input class="form-control"id="id_fechainiciomod21" name="fechainiciomod21" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod21">Fechafinalmod21:</label></th><td><input class="form-control"  id="id_fechafinalmod21" name="fechafinalmod21" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas21">Horasteoricas21:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas21" maxlength="100" name="horasteoricas21" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas21">Horaspracticas21:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas21" maxlength="100" name="horaspracticas21" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod21">Instructormod21:</label></th><td><select class="form-control" id="id_instructormod21" name="instructormod21">
+                                        <option value="" selected="selected">---------</option>
+                                          {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo22">Modulo22:</label></th><td><input class="form-control" id="id_m_dulo22" maxlength="100" name="m_dulo22" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod22">Fechainiciomod22:</label></th><td><input class="form-control" id="id_fechainiciomod22" name="fechainiciomod22" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod22">Fechafinalmod22:</label></th><td><input class="form-control" id="id_fechafinalmod22" name="fechafinalmod22" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas22">Horasteoricas22:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas22" maxlength="100" name="horasteoricas22" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas22">Horaspracticas22:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas22" maxlength="100" name="horaspracticas22" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod22">Instructormod22:</label></th><td><select class="form-control" id="id_instructormod22" name="instructormod22">
+                                        <option value="" selected="selected">---------</option>
+                                        {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo23">Modulo23:</label></th><td><input class="form-control" id="id_m_dulo23" maxlength="100" name="m_dulo23" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod23">Fechainiciomod23:</label></th><td><input class="form-control" id="id_fechainiciomod23" name="fechainiciomod23" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod23">Fechafinalmod23:</label></th><td><input class="form-control" id="id_fechafinalmod23" name="fechafinalmod23" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas23">Horasteoricas23:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas23" maxlength="100" name="horasteoricas23" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas23">Horaspracticas23:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas23" maxlength="100" name="horaspracticas23" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod23">Instructormod23:</label></th><td><select class="form-control" id="id_instructormod23" name="instructormod23">
+                                        <option value="" selected="selected">---------</option>
+                                     {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo24">Modulo24:</label></th><td><input class="form-control" id="id_m_dulo24" maxlength="100" name="m_dulo24" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod24">Fechainiciomod24:</label></th><td><input class="form-control" id="id_fechainiciomod24" name="fechainiciomod24" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod24">Fechafinalmod24:</label></th><td><input class="form-control" id="id_fechafinalmod24" name="fechafinalmod24" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas24">Horasteoricas24:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas24" maxlength="100" name="horasteoricas24" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas24">Horaspracticas24:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas24" maxlength="100" name="horaspracticas24" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod24">Instructormod24:</label></th><td><select class="form-control" id="id_instructormod24" name="instructormod24">
+                                        <option value="" selected="selected">---------</option>
+                                        {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo25">Modulo25:</label></th><td><input id="id_m_dulo25" class="form-control" maxlength="100" name="m_dulo25" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod25">Fechainiciomod25:</label></th><td><input class="form-control" id="id_fechainiciomod25" name="fechainiciomod25" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod25">Fechafinalmod25:</label></th><td><input class="form-control" id="id_fechafinalmod25" name="fechafinalmod25" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas25">Horasteoricas25:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas25" maxlength="100" name="horasteoricas25" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas25">Horaspracticas25:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas25" maxlength="100" name="horaspracticas25" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod25">Instructormod25:</label></th><td><select class="form-control" id="id_instructormod25" name="instructormod25">
+                                        <option value="" selected="selected">---------</option>
+                                    {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo26">Modulo26:</label></th><td><input  class="form-control" id="id_m_dulo26" maxlength="100" name="m_dulo26" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod26">Fechainiciomod26:</label></th><td><input class="form-control" id="id_fechainiciomod26" name="fechainiciomod26" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod26">Fechafinalmod26:</label></th><td><input class="form-control" id="id_fechafinalmod26" name="fechafinalmod26" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas26">Horasteoricas26:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas26" maxlength="100" name="horasteoricas26" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas26">Horaspracticas26:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas26" maxlength="100" name="horaspracticas26" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod26">Instructormod26:</label></th><td><select class="form-control" id="id_instructormod26" name="instructormod26">
+                                        <option value="" selected="selected">---------</option>
+                                        {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo27">Modulo27:</label></th><td><input  class="form-control"  id="id_m_dulo27" maxlength="100" name="m_dulo27" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod27">Fechainiciomod27:</label></th><td><input  class="form-control" id="id_fechainiciomod27" name="fechainiciomod27" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod27">Fechafinalmod27:</label></th><td><input  class="form-control" id="id_fechafinalmod27" name="fechafinalmod27" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas27">Horasteoricas27:</label></th><td><input  data-hora="" class="form-control"id="id_horasteoricas27" maxlength="100" name="horasteoricas27" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas27">Horaspracticas27:</label></th><td><input data-hora=""  class="form-control" id="id_horaspracticas27" maxlength="100" name="horaspracticas27" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod27">Instructormod27:</label></th><td><select  class="form-control" id="id_instructormod27" name="instructormod27">
+                                        <option value="" selected="selected">---------</option>
+                                     {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo28">Modulo28:</label></th><td><input class="form-control" id="id_m_dulo28" maxlength="100" name="m_dulo28" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod28">Fechainiciomod28:</label></th><td><input class="form-control" id="id_fechainiciomod28" name="fechainiciomod28" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod28">Fechafinalmod28:</label></th><td><input class="form-control" id="id_fechafinalmod28" name="fechafinalmod28" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas28">Horasteoricas28:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas28" maxlength="100" name="horasteoricas28" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas28">Horaspracticas28:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas28" maxlength="100" name="horaspracticas28" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod28">Instructormod28:</label></th><td><select class="form-control" id="id_instructormod28" name="instructormod28">
+                                        <option value="" selected="selected">---------</option>
+                                        {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo29">Modulo29:</label></th><td><input class="form-control" id="id_m_dulo29" maxlength="100" name="m_dulo29" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod29">Fechainiciomod29:</label></th><td><input class="form-control" id="id_fechainiciomod29" name="fechainiciomod29" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod29">Fechafinalmod29:</label></th><td><input class="form-control" id="id_fechafinalmod29" name="fechafinalmod29" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas29">Horasteoricas29:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas29" maxlength="100" name="horasteoricas29" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas29">Horaspracticas29:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas29" maxlength="100" name="horaspracticas29" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod29">Instructormod29:</label></th><td><select class="form-control" id="id_instructormod29" name="instructormod29">
+                                        <option value="" selected="selected">---------</option>
+                                    {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+                                        <tr><th><label for="id_m_dulo30">Modulo30:</label></th><td><input class="form-control" id="id_m_dulo30" maxlength="100" name="m_dulo30" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechainiciomod30">Fechainiciomod30:</label></th><td><input class="form-control" id="id_fechainiciomod30" name="fechainiciomod30" type="text" /></td></tr>
+                                        <tr><th><label for="id_fechafinalmod30">Fechafinalmod30:</label></th><td><input class="form-control" id="id_fechafinalmod30" name="fechafinalmod30" type="text" /></td></tr>
+                                        <tr><th><label for="id_horasteoricas30">Horasteoricas30:</label></th><td><input data-hora="" class="form-control" id="id_horasteoricas30" maxlength="100" name="horasteoricas30" type="text" /></td></tr>
+                                        <tr><th><label for="id_horaspracticas30">Horaspracticas30:</label></th><td><input data-hora="" class="form-control" id="id_horaspracticas30" maxlength="100" name="horaspracticas30" type="text" /></td></tr>
+                                        <tr><th><label for="id_instructormod30">Instructormod30:</label></th><td><select class="form-control" id="id_instructormod30" name="instructormod30">
+                                        <option value="" selected="selected">---------</option>
+                                {% for i in instructores %}
+                                            <option value="{{i.ed_id}}">{{i.ed_nombreeducador}}</option>
+                                            {% endfor %}
+                                        </select></td></tr>
+
+                                              </table>
+                                              <input type="submit" id="bt-submit" value="Guardar" class="btn btn-lg btn-primary btn-block" >
+                                          </form>        
+                                    </table>
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar Ventana</button>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+                 <h5>Información Horas Modulos</h5>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre Proceso</th>
+                            <th>Total de Horas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% for h in horas %}
+
+                        <tr>
+                            <td>{{h.Nombre_Proceso}}</td>
+                        <td>{{h.Total_Horas}}Horas</td>
+                        </tr>
+                                                {% endfor %}
+
+
+
+                    <table id="mytable"class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>PROCESO</th>
+                        <th>MODULO</th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for procesoeducativo in modulos %}
+                    <tr>
+
+                        <td data-id=""><strong>{{procesoeducativo.claveev}}</strong></td>
+                        <td><ol><em>{{procesoeducativo.m_dulo1}}</ol>
+                            <ol>{{procesoeducativo.m_dulo2}}</ol>
+                            <ol>{{procesoeducativo.m_dulo3}}</ol>
+                            <ol>{{procesoeducativo.m_dulo4}}</ol>
+                            <ol>{{procesoeducativo.m_dulo5}}</ol>
+                            <ol>{{procesoeducativo.m_dulo6}}</ol>
+                            <ol>{{procesoeducativo.m_dulo7}}</ol>
+                            <ol>{{procesoeducativo.m_dulo8}}</ol>
+                            <ol>{{procesoeducativo.m_dulo9}}</ol>
+                            <ol>{{procesoeducativo.m_dulo10}}</ol>
+                            <ol>{{procesoeducativo.m_dulo11}}</ol>
+                            <ol>{{procesoeducativo.m_dulo12}}</ol>
+                            <ol>{{procesoeducativo.m_dulo13}}</ol>
+                            <ol>{{procesoeducativo.m_dulo14}}</ol>
+                            <ol>{{procesoeducativo.m_dulo15}}</ol>
+                            <ol>{{procesoeducativo.m_dulo16}}</ol>
+                            <ol>{{procesoeducativo.m_dulo17}}</ol>
+                            <ol>{{procesoeducativo.m_dulo18}}</ol>
+                            <ol>{{procesoeducativo.m_dulo19}}</ol>
+                            <ol>{{procesoeducativo.m_dulo20}}</ol>
+                            <ol>{{procesoeducativo.m_dulo21}}</ol>
+                            <ol>{{procesoeducativo.m_dulo22}}</ol>
+                            <ol>{{procesoeducativo.m_dulo23}}</ol>
+                            <ol>{{procesoeducativo.m_dulo24}}</ol>
+                            <ol>{{procesoeducativo.m_dulo25}}</ol>
+                            <ol>{{procesoeducativo.m_dulo26}}</ol>
+                            <ol>{{procesoeducativo.m_dulo27}}</ol>
+                            <ol>{{procesoeducativo.m_dulo28}}</ol>
+                            <ol>{{procesoeducativo.m_dulo29}}</ol>
+                            <ol>{{procesoeducativo.m_dulo30}}</em></ol>
+
+                        </td>
+
+                        <td>
+                            <a href="{% url 'vista_modificarmodulo' procesoeducativo.pk %}"><button type="submit" class="btn btn-primary">Modificar</button></a>
+                        </td>
+
+                         <td>
+                            <a href="{% url 'vista_eliminarmodulo' procesoeducativo.pk %}"><button type="submit" class="btn btn-danger">BORRAR</button></a>
+                        </td>
+                      
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ contacts.number }} de {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </span>
+</div>
+<div id="resultado"></div>
+		<nav aria-label="...">
+
+</nav>
+            </div>
+
+
+<script  type="text/javascript" >
+    $("button").hide();
+    $("#mostrar").click(function(){
+    $("button").show();
+    $("#mostrar").dblclick(function(){
+    $("button").hide();
+        });
+    });
+
+    $("#id_claveev").change(function(){
+        //$( "#id_claveev option:selected" ).text()
+        $("#mytable tbody tr td[data-id]").each(function(index, el) {
+           if ($( "#id_claveev option:selected" ).text() == $(this).text()){
+                alert("El proceso ya tiene asignado un modulo");
+           }
+        });
+    });
+
+</script>
+
+         <script>
+
+$(document).ready(function(){
+     $("#bt-submit").click(function(event) {
+            var sum = 0;
+            var value = 0;
+            var totalhours = parseFloat($("#id_claveev option:selected").attr("data-horatotal"));
+             $.each($("input[data-hora='']"), function(index, val) {
+                  
+                  value = ($(this).val().length == 0) ? 0: parseFloat($(this).val());
+                  sum = parseFloat(sum) + value;
+             });
+
+             if (sum > totalhours){
+                alert("El total de horas supera la cantidad de horas del Proceso Educativo");
+                    event.preventDefault();
+                }
+             else if (sum  < totalhours){
+                alert("El total de horas debe ser igual a el total de horas del proceso");
+                    event.preventDefault();
+                }else if ($( "#id_claveev option:selected" ).text() == $(this).text()){
+                    event.preventDefault();
+                    alert("El proceso ya tiene asignado un modulo");
+                } 
+                
+                $("#mytable tbody tr td[data-id]").each(function(index, el) {
+                   if ($( "#id_claveev option:selected" ).text() == $(this).text()){
+                        alert("El proceso ya tiene asignado un modulo");
+                        event.preventDefault();
+                   }
+                });
+
+    });
+        $("#search").keyup(function(){
+            if( $(this).val() != "")
+            {
+                $("#mytable tbody>tr").hide();
+                $("#mytable td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+            }
+            else
+            {
+                $("#mytable  tbody>tr").show();
+            }
+        });
+    });
+    $.extend($.expr[":"],
+    {
+        "contains-ci": function(elem, i, match, array)
+        {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
+
+
+        </script>
+
+<script type="text/javascript">
+    $(function(){
+    $('#id_fecha_de_nacimiento').change(function() {
+    var fecha = $("#id_fecha_de_nacimiento").val();{
+   // alert(fecha)
+    $.ajax({
+    data:{'fecha':fecha},
+    url:'{% url 'calcular_edad' %}',
+    type:'post',
+    success: function(data){
+
+    //alert(data);
+    //console.log(data);
+    var html=""
+    for(var i = 0; i<data.length ; i++){
+    html += ''+data[0].edad_numerica+''+data[i].edad_meses+''}
+    $("#id_edadentprogramaa_os").val(data[0].edad_numerica);
+    $("#id_edadentroprogramameses").val(data[0].edad_meses);
+
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_dep').change(function() {
+    var id = $("#id_dep").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].pk+'">'+data[i].mun_municipio+'</option>'}
+    $('#id_mun').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_mun').change(function() {
+    var id = $("#id_mun").val();{
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_al' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idaldea+'">'+data[i].nombrealdea+'</option>'}
+    $('#id_aldea').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+ <script type="text/javascript">
+    $(function(){
+    $('#id_aldea').change(function() {
+    var id = $("#id_aldea").val();{
+      //  alert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_ajax_ca' %}',
+    type:'post',
+    success: function(data){
+    //alert(data);
+    //console.log(data);
+    var html="<option>-----</option>"
+    for(var i = 0; i<data.length ; i++){
+    html += '<option value="'+data[i].idcaserio+'">'+data[i].nombrecaserio+'</option>'}
+    $('#id_caserio').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $('#id_fecha_de_nacimiento').datepicker({
+      dateFormat: 'yy-mm-dd',
+      defaultDate: "+2m"
+    });
+      $('#id_lasteditdate').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_creationdate').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+});
+</script>
+
+<script type="text/javascript">
+$(function() {
+    $('#id_fechainiciomod1').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod1').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+    $('#id_fechainiciomod2').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod2').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod3').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod3').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod4').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod4').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod5').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod5').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod6').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod6').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod7').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod7').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod8').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod8').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod9').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod9').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod10').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod10').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod11').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod11').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod12').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod12').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod13').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod13').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod14').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod14').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod15').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod15').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod16').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod16').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod17').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod17').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod18').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod18').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod19').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod19').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod20').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod20').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod21').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod21').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod22').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod22').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechainiciomod23').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod23').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod24').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod24').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod25').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod25').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod26').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod26').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod27').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod27').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod28').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod28').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod29').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod29').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+         $('#id_fechainiciomod30').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+      $('#id_fechafinalmod30').datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+});
+
+</script>
+
+
+
+
+
+	</div>
+{% endblock %}
+

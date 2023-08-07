@@ -1,0 +1,1003 @@
+{% extends "dashboard.html"%}
+
+        {% block contenido %}
+
+
+<h3>Reporte Condensado Detallado Proceso</h3>
+<hr>
+
+
+
+       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 ">
+             <div class="form-group">
+      <h5><span class="label label-success">Filtros</span></h5>
+              <select multiple class="form-control" id="sel1" name="filtro">
+                  {% for MasterFiltroHQ in filtros %}
+                <option value="{{MasterFiltroHQ.tabla}}{{MasterFiltroHQ.nombre}}" >{{MasterFiltroHQ.alias}}</option>
+                  {% endfor %}
+
+              </select>
+
+            </div>
+
+
+       </div>
+       <div id="clear">
+
+       <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 ">
+              <h5><span class="label label-success">Opciones  </span></h5>
+
+              <form  id="fomulario" action="/exportar/" method="post" role="form" enctype="multipart/form-data">
+
+
+            <select name="zip" id="zip" class="form-control">
+                <option value="0">-----Seleccione CECAPS--------</option>
+
+                    {% for c in nombres %}
+                 <option value="''{{c.username}}''">{{c.username}}</option>
+                      {% endfor %}
+
+
+
+
+            </select>
+
+              <select  class="form-control" id="proceso" name="proceso">
+                  {% for a in procesoeducativo %}
+                <option value="''{{a.Nombre_Proceso}}''" >{{a.Nombre_Proceso}}</option>
+                                      {% endfor %}
+
+              </select>
+
+
+               <select name="departamento" id="departamento" class="form-control">
+                   <option value="0">-----Seleccione Departamento --------</option>
+
+                    {% for d in departamentos %}
+                 <option value="''{{d.dep_departamento}}''">{{d.dep_departamento}}</option>
+                      {% endfor %}
+
+               </select>
+
+                <p>Date</p>
+              <input type="date" name="date" id="datepicker" class="form-control" value="" required="required" title="">
+ <p>Numeros</p>
+              <input type="number" name="numero" id="numero" class="form-control" value="" min="{0"} max="100" step="" title="">
+
+
+       </div>
+
+
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                      <h5><span class="label label-success">Operadores</span></h5>
+
+           <div class="form-group">
+              <label for="sel2">Selecciona Operador:</label>
+              <select class="form-control" id="operador" name="operador">
+                  <option value="">Seleccione Operador</option>
+                <option value="=">Igual =</option>
+                  <option value="<>">Distinto <></option>
+                  <option value=">">Mayor que ></option>
+                  <option value="<">Menor que<</option>
+                  <option value=">=">Mayor o igual >=</option>
+                  <option value="<=">Menor o igual <=</option>
+                <option value="+">Suma +</option>
+                <option value="BETWEEN">BETWEEN</option>
+
+              </select>
+
+
+            </div>
+          <select class="form-control" id="andor" name="andor">
+         <option value="">Seleccione Condicion</option>
+
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+
+              </select>
+
+
+
+        <button id="limpiar" type="button" class="btn btn-danger btn-sm">Limpiar</button>
+      </div>
+
+
+</form>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 ">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 well">
+
+
+
+<form  action="" method="post" id="formulario" role="form" enctype="multipart/form-data" >
+
+
+
+
+
+    <table class="table table-bordered table-hover" id="tabla" >
+        <thead>
+            <tr>
+               <tr>
+            <th>Filtro</th>
+            <th>Operador</th>
+            <th>Valor</th>
+            <th>Condicion</th>
+
+
+
+        </thr>
+            </tr>
+        </thead>
+        <tbody>
+        <input type="button" class="btn btn-success" id="agregar" value="Agregar Filtro" />
+                <button type="button"  id="del" class="btn btn-danger btn-sm">Eliminar Filtro</button>
+                 <button type="button"  id="reset" class="btn btn-info btn-sm">Limpiar Filtros</button>
+
+
+            <td id="sz"></td>
+            <td id="oper"></td>
+            <td id="pa"></td>
+            <td id="co"></td>
+
+        </tr>
+        </tbody>
+    </table>
+<table class="table table-hover" id="eliminar">
+    <thead>
+        <tr>
+            <th>Filtros Seleccionado</th>
+
+        </tr>
+    </thead>
+    <tbody id='perron'>
+        <tr class="fila-base">
+            <td id="resultado"></td>
+        </tr>
+    </tbody>
+</table>
+
+ </form>
+
+<div id='valores'></div>
+</div>
+
+
+
+  
+</div>
+
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  style="overflow-y: auto; height:autox;" >
+  
+<h3>Reporte Detallado de Evento/Proceso de Capacitación</h3>
+
+  <table class="table table-striped" id="customers">
+
+    <thead>
+      <tr>
+        <th>Nombre Completo</th>
+        <th>Identidad</th>
+        <th>Sexo</th>
+        <th>Edad Años</th>
+        <th>Nivel Educativo</th>
+        <th data-item="1">NotaTeorica1</th>
+        <th data-item="2">HorasTeoria1</th>
+        <th data-item="3">NotaPractica1</th>
+        <th data-item="4">HorasPractica1</th>
+        <th data-item="5">Total Horas1</th>
+        <th data-item="6">Total Nota1</th>
+        <th data-item="7">NotaTeorica2</th>
+        <th data-item="8">HorasTeoria2</th>
+        <th data-item="9">NotaPractica2</th>
+        <th data-item="10">HorasPractica2</th>
+        <th data-item="11">Total Horas2</th>
+        <th data-item="12">Total Nota2</th>
+        <th data-item="13">NotaTeorica3</th>
+        <th data-item="14">HorasTeoria3</th>
+        <th data-item="15">NotaPractica3</th>
+        <th data-item="16">HorasPractica3</th>
+        <th data-item="17">Total Horas3</th>
+        <th data-item="18">Total Nota3</th>
+        <th data-item="19">NotaTeorica4</th>
+        <th data-item="20">HorasTeoria4</th>
+        <th data-item="21">NotaPractica4</th>
+        <th data-item="22">HorasPractica4</th>
+        <th data-item="23">Total Horas4</th>
+        <th data-item="24">Total Nota4</th>
+        <th data-item="25">NotaTeorica5</th>
+        <th data-item="26">HorasTeoria5</th>
+        <th data-item="27">NotaPractica5</th>
+        <th data-item="28">HorasPractica5</th>
+        <th data-item="29">Total Horas5</th>
+        <th data-item="30">Total Nota5</th>
+        <th data-item="31">NotaTeorica6</th>
+        <th data-item="32">HorasTeoria6</th>
+        <th data-item="33">NotaPractica6</th>
+        <th data-item="34">HorasPractica6</th>
+        <th data-item="35">Total Horas6</th>
+        <th data-item="36">Total Nota6</th>
+          <th data-item="37">NotaTeorica7</th>
+        <th data-item="38">HorasTeoria7</th>
+        <th data-item="39">NotaPractica7</th>
+        <th data-item="40">HorasPractica7</th>
+        <th data-item="41">Total Horas7</th>
+        <th data-item="42">Total Nota7</th>
+    <th data-item="43">NotaTeorica8</th>
+        <th data-item="44">HorasTeoria8</th>
+        <th data-item="45">NotaPractica8</th>
+        <th data-item="46">HorasPractica8</th>
+
+
+
+
+        <th data-item="47">Total Horas8</th>
+        <th data-item="48">Total Nota8</th>
+    <th data-item="49">NotaTeorica9</th>
+        <th data-item="50">HorasTeoria9</th>
+        <th data-item="51">NotaPractica9</th>
+        <th data-item="52">HorasPractica9</th>
+        <th data-item="53">Total Horas9</th>
+        <th data-item="54">Total Nota9</th>
+            <th data-item="55">NotaTeorica10</th>
+        <th data-item="56">HorasTeoria10</th>
+        <th data-item="57">NotaPractica10</th>
+        <th data-item="58">HorasPractica10</th>
+        <th data-item="59">Total Horas10</th>
+        <th data-item="60">Total Nota10</th>
+
+
+    <th data-item="61">NotaTeorica11</th>
+        <th data-item="62">HorasTeoria11</th>
+        <th data-item="63">NotaPractica11</th>
+        <th data-item="64">HorasPractica11</th>
+        <th data-item="65">Total Horas11</th>
+        <th data-item="66">Total Nota11</th>
+    <th data-item="67">NotaTeorica12</th>
+        <th data-item="68">HorasTeoria12</th>
+        <th data-item="69">NotaPractica12</th>
+        <th data-item="70">HorasPractica12</th>
+        <th data-item="71">Total Horas12</th>
+        <th data-item="72">Total Nota12</th>        
+    <th data-item="73">NotaTeorica13</th>
+        <th data-item="74">HorasTeoria13</th>
+        <th data-item="75">NotaPractica13</th>
+        <th data-item="76">HorasPractica13</th>
+        <th data-item="77">Total Horas13</th>
+        <th data-item="78">Total Nota13</th>
+    <th data-item="79">NotaTeorica14</th>
+        <th data-item="80">HorasTeoria14</th>
+
+
+
+
+
+        <th data-item="81">NotaPractica14</th>
+        <th data-item="82">HorasPractica14</th>
+        <th data-item="83">Total Horas14</th>
+        <th data-item="84">Total Nota14</th>
+
+
+    <th data-item="85">NotaTeorica15</th>
+        <th data-item="86">HorasTeoria15</th>
+        <th data-item="87">NotaPractica15</th>
+        <th data-item="88">HorasPractica15</th>
+        <th data-item="89">Total Horas15</th>
+        <th data-item="90">Total Nota15</th> 
+           <th data-item="91">NotaTeorica16</th>
+        <th data-item="92">HorasTeoria16</th>
+        <th data-item="93">NotaPractica16</th>
+        <th data-item="94">HorasPractica16</th>
+        <th data-item="95">Total Horas16</th>
+        <th data-item="96">Total Nota16</th>      
+
+
+        
+      <th data-item="97">NotaTeorica17</th>
+        <th data-item="98">HorasTeoria17</th>
+        <th data-item="99">NotaPractica17</th>
+        <th data-item="100">HorasPractica17</th>
+        <th data-item="101">Total Horas17</th>
+        <th data-item="102">Total Nota17</th>
+      
+
+
+      <th data-item="103">NotaTeorica18</th>
+        <th data-item="104">HorasTeoria18</th>
+        <th data-item="105">NotaPractica18</th>
+        <th data-item="106">HorasPractica18</th>
+        <th data-item="107">Total Horas18</th>
+        <th data-item="108">Total Nota18</th>
+      <th data-item="109">NotaTeorica19</th>
+        <th data-item="110">HorasTeoria19</th>
+        <th data-item="111">NotaPractica19</th>
+        <th data-item="112">HorasPractica19</th>
+        <th data-item="113">Total Horas19</th>
+        <th data-item="114">Total Nota19</th>      
+      <th data-item="115">NotaTeorica20</th>
+        <th data-item="116">HorasTeoria20</th>
+        <th data-item="117">NotaPractica20</th>
+        <th data-item="118">HorasPractica20</th>
+        <th data-item="119">Total Horas20</th>
+        <th data-item="120">Total Nota20</th>      
+
+
+<th data-item="121">NotaTeorica21</th>
+        <th data-item="122">HorasTeoria21</th>
+        <th data-item="123">NotaPractica21</th>
+        <th data-item="124">HorasPractica21</th>
+        <th data-item="125">Total Horas21</th>
+        <th data-item="126">Total Nota21</th>      
+     
+<th data-item="127">NotaTeorica22</th>
+        <th data-item="128">HorasTeoria22</th>
+        <th data-item="129">NotaPractica22</th>
+        <th data-item="130">HorasPractica22</th>
+        <th data-item="131">Total Horas22</th>
+        <th data-item="132">Total Nota22</th>      
+     
+<th data-item="133">NotaTeorica23</th>
+        <th data-item="134">HorasTeoria23</th>
+        <th data-item="135">NotaPractica23</th>
+        <th data-item="136">HorasPractica23</th>
+        <th data-item="137">Total Horas23</th>
+        <th data-item="138">Total Nota23</th>      
+     <th data-item="139">NotaTeorica24</th>
+        <th data-item="140">HorasTeoria24</th>
+        <th data-item="141">NotaPractica24</th>
+        <th data-item="142">HorasPractica24</th>
+        <th data-item="143">Total Horas24</th>
+        <th data-item="144">Total Nota24</th>      
+     <th data-item="145">NotaTeorica25</th>
+        <th data-item="146">HorasTeoria25</th>
+        <th data-item="147">NotaPractica25</th>
+        <th data-item="148">HorasPractica25</th>
+        <th data-item="149">Total Horas25</th>
+        <th data-item="150">Total Nota25</th>      
+     <th data-item="151">NotaTeorica26</th>
+        <th data-item="152">HorasTeoria26</th>
+        <th data-item="153">NotaPractica26</th>
+        <th data-item="154">HorasPractica26</th>
+        <th data-item="155">Total Horas26</th>
+        <th data-item="156">Total Nota26</th>        
+    <th data-item="157">NotaTeorica27</th>
+        <th data-item="158">HorasTeoria27</th>
+        <th data-item="159">NotaPractica27</th>
+        <th data-item="160">HorasPractica27</th>
+        <th data-item="161">Total Horas27</th>
+        <th data-item="162">Total Nota27</th>      
+     <th data-item="163">NotaTeorica28</th>
+        <th data-item="164">HorasTeoria28</th>
+        <th data-item="165">NotaPractica28</th>
+        <th data-item="166">HorasPractica28</th>
+        <th data-item="167">Total Horas28</th>
+        <th data-item="168">Total Nota28</th>      
+     
+
+
+
+
+     
+          
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in resultado %}
+      <tr>
+        <td>{{a.nombre}}</td>
+        <td>{{a.identidad}}</td>
+        <td>{{a.sexo}}</td>
+        <td>{{a.edad}}</td>
+        <td>{{a.niveleducativo}}</td>
+        <td data-item-e="1">{{a.nt1}}</td>
+        <td data-item-e="2">{{a.ht1}}</td>
+        <td data-item-e="3">{{a.np1}}</td>
+        <td data-item-e="4">{{a.hp1}}</td>
+        <td data-item-e="5"><strong>{{a.totalth1}}</strong></td>
+        <td data-item-e="6"><strong>{{a.totalnota1}}</strong></td>
+        <td data-item-e="7">{{a.nt2}}</td>
+        <td data-item-e="8">{{a.ht2}}</td>
+        <td data-item-e="9">{{a.np2}}</td>
+        <td data-item-e="10">{{a.hp2}}</td>
+        <td data-item-e="11"><strong>{{a.totalth2}}</strong></td>
+        <td data-item-e="12"><strong>{{a.totalnota2}}</strong></td>
+        <td data-item-e="13">{{a.nt3}}</td>
+        <td data-item-e="14">{{a.ht3}}</td>
+        <td data-item-e="15">{{a.np3}}</td>
+        <td data-item-e="16">{{a.hp3}}</td>
+        <td data-item-e="17"><strong>{{a.totalth3}}</strong></td>
+        <td data-item-e="18"><strong>{{a.totalnota3}}</strong></td>
+        <td data-item-e="19">{{a.nt4}}</td>
+        <td data-item-e="20">{{a.ht4}}</td>
+        <td data-item-e="21">{{a.np4}}</td>
+        <td data-item-e="22">{{a.hp4}}</td>
+        <td data-item-e="23"><strong>{{a.totalth4}}</strong></td>
+        <td data-item-e="24"><strong>{{a.totalnota4}}</strong></td>
+         <td data-item-e="25">{{a.nt5}}</td>
+        <td data-item-e="26">{{a.ht5}}</td>
+        <td data-item-e="27">{{a.np5}}</td>
+        <td data-item-e="28">{{a.hp5}}</td>
+        <td data-item-e="29"><strong>{{a.totalth5}}</strong></td>
+        <td data-item-e="30"><strong>{{a.totalnota5}}</strong></td>
+         <td data-item-e="31">{{a.nt6}}</td>
+        <td data-item-e="32">{{a.ht6}}</td>
+        <td data-item-e="33">{{a.np6}}</td>
+        <td data-item-e="34">{{a.hp6}}</td>
+        <td data-item-e="35"><strong>{{a.totalth6}}</strong></td>
+        <td data-item-e="36"><strong>{{a.totalnota6}}</strong></td>
+       <td data-item-e="37">{{a.nt7}}</td>
+        <td data-item-e="38">{{a.ht7}}</td>
+        <td data-item-e="39">{{a.np7}}</td>
+        <td data-item-e="40">{{a.hp7}}</td>
+        <td data-item-e="41"><strong>{{a.totalth7}}</strong></td>
+        <td data-item-e="42"><strong>{{a.totalnota7}}</strong></td>
+         <td data-item-e="43">{{a.nt8}}</td>
+        <td data-item-e="44">{{a.ht8}}</td>
+        <td data-item-e="45">{{a.np8}}</td>
+        <td data-item-e="46">{{a.hp8}}</td>
+        <td data-item-e="47"><strong>{{a.totalth8}}</strong></td>
+        <td data-item-e="48"><strong>{{a.totalnota8}}</strong></td>
+ <td data-item-e="49">{{a.nt9}}</td>
+        <td data-item-e="50">{{a.ht9}}</td>
+        <td data-item-e="51">{{a.np9}}</td>
+        <td data-item-e="52">{{a.hp9}}</td>
+        <td data-item-e="53"><strong>{{a.totalth9}}</strong></td>
+        <td data-item-e="54"><strong>{{a.totalnota9}}</strong></td>
+ <td data-item-e="55">{{a.nt10}}</td>
+        <td data-item-e="56">{{a.ht10}}</td>
+        <td data-item-e="57">{{a.np10}}</td>
+        <td data-item-e="58">{{a.hp10}}</td>
+        <td data-item-e="59"><strong>{{a.totalth10}}</strong></td>
+        <td data-item-e="60"><strong>{{a.totalnota10}}</strong></td>
+     
+ <td data-item-e="61">{{a.nt11}}</td>
+        <td data-item-e="62">{{a.ht11}}</td>
+        <td data-item-e="63">{{a.np11}}</td>
+        <td data-item-e="64">{{a.hp11}}</td>
+        <td data-item-e="65"><strong>{{a.totalth11}}</strong></td>
+        <td data-item-e="66"><strong>{{a.totalnota11}}</strong></td>
+        <td data-item-e="67">{{a.nt12}}</td>
+           <td data-item-e="68">{{a.ht12}}</td>
+        <td data-item-e="69">{{a.np12}}</td>
+        <td data-item-e="70">{{a.hp12}}</td>
+        <td data-item-e="71"><strong>{{a.totalth12}}</strong></td>
+        <td data-item-e="72"><strong>{{a.totalnota12}}</strong></td>
+      <td data-item-e="73">{{a.nt13}}</td>
+        <td data-item-e="74">{{a.ht13}}</td>
+        <td data-item-e="75">{{a.np13}}</td>
+        <td data-item-e="76">{{a.hp13}}</td>
+        <td data-item-e="77"><strong>{{a.totalth13}}</strong></td>
+        <td data-item-e="78"><strong>{{a.totalnota13}}</strong></td>
+  <td data-item-e="79">{{a.nt14}}</td>
+        <td data-item-e="80">{{a.ht14}}</td>
+        <td data-item-e="81">{{a.np14}}</td>
+        <td data-item-e="82">{{a.hp14}}</td>
+        <td data-item-e="83"><strong>{{a.totalth14}}</strong></td>
+        <td data-item-e="84"><strong>{{a.totalnota14}}</strong></td>
+  
+
+   <td data-item-e="85">{{a.nt15}}</td>
+        <td data-item-e="86">{{a.ht15}}</td>
+        <td data-item-e="87">{{a.np15}}</td>
+        <td data-item-e="88">{{a.hp15}}</td>
+        <td data-item-e="89"><strong>{{a.totalth15}}</strong></td>
+        <td data-item-e="90"><strong>{{a.totalnota15}}</strong></td>    
+
+
+      <td data-item-e="91">{{a.nt16}}</td>
+        <td data-item-e="92">{{a.ht16}}</td>
+        <td data-item-e="93">{{a.np16}}</td>
+        <td data-item-e="94">{{a.hp16}}</td>
+        <td data-item-e="95"><strong>{{a.totalth16}}</strong></td>
+        <td data-item-e="96"><strong>{{a.totalnota16}}</strong></td>
+
+
+ <td data-item-e="97">{{a.nt17}}</td>
+        <td data-item-e="98">{{a.ht17}}</td>
+        <td data-item-e="99">{{a.np17}}</td>
+        <td data-item-e="100">{{a.hp17}}</td>
+        <td data-item-e="101"><strong>{{a.totalth17}}</strong></td>
+        <td data-item-e="102"><strong>{{a.totalnota17}}</strong></td>
+
+ <td data-item-e="103">{{a.nt18}}</td>
+        <td data-item-e="104">{{a.ht18}}</td>
+        <td data-item-e="105">{{a.np18}}</td>
+        <td data-item-e="106">{{a.hp18}}</td>
+        <td data-item-e="107"><strong>{{a.totalth18}}</strong></td>
+        <td data-item-e="108"><strong>{{a.totalnota18}}</strong></td>
+ <td data-item-e="109">{{a.nt19}}</td>
+        <td data-item-e="110">{{a.ht19}}</td>
+        <td data-item-e="111">{{a.np19}}</td>
+        <td data-item-e="112">{{a.hp19}}</td>
+        <td data-item-e="113"><strong>{{a.totalth19}}</strong></td>
+        <td data-item-e="114"><strong>{{a.totalnota19}}</strong></td>
+ <td data-item-e="115">{{a.nt20}}</td>
+        <td data-item-e="116">{{a.ht20}}</td>
+        <td data-item-e="117">{{a.np20}}</td>
+        <td data-item-e="118">{{a.hp20}}</td>
+        <td data-item-e="119"><strong>{{a.totalth20}}</strong></td>
+        <td data-item-e="120"><strong>{{a.totalnota20}}</strong></td>
+     <td data-item-e="121">{{a.nt21}}</td>
+        <td data-item-e="122">{{a.ht21}}</td>
+        <td data-item-e="123">{{a.np21}}</td>
+        <td data-item-e="124">{{a.hp21}}</td>
+        <td data-item-e="125"><strong>{{a.totalth21}}</strong></td>
+        <td data-item-e="126"><strong>{{a.totalnota21}}</strong></td>
+        <td data-item-e="127">{{a.nt22}}</td>
+        <td data-item-e="128">{{a.ht22}}</td>
+        <td data-item-e="129">{{a.np22}}</td>
+        <td data-item-e="130">{{a.hp22}}</td>
+        <td data-item-e="131"><strong>{{a.totalth22}}</strong></td>
+        <td data-item-e="132"><strong>{{a.totalnota22}}</strong></td>
+        <td data-item-e="133">{{a.nt23}}</td>
+        <td data-item-e="134">{{a.ht23}}</td>
+        <td data-item-e="135">{{a.np23}}</td>
+        <td data-item-e="136">{{a.hp23}}</td>
+        <td data-item-e="137"><strong>{{a.totalth23}}</strong></td>
+        <td data-item-e="138"><strong>{{a.totalnota23}}</strong></td>
+     <td data-item-e="139">{{a.nt24}}</td>
+        <td data-item-e="140">{{a.ht24}}</td>
+        <td data-item-e="141">{{a.np24}}</td>
+        <td data-item-e="142">{{a.hp24}}</td>
+        <td data-item-e="143"><strong>{{a.totalth24}}</strong></td>
+        <td data-item-e="144"><strong>{{a.totalnota24}}</strong></td>
+     <td data-item-e="145">{{a.nt25}}</td>
+        <td data-item-e="146">{{a.ht25}}</td>
+        <td data-item-e="147">{{a.np25}}</td>
+        <td data-item-e="148">{{a.hp25}}</td>
+        <td data-item-e="149"><strong>{{a.totalth25}}</strong></td>
+        <td data-item-e="150"><strong>{{a.totalnota25}}</strong></td>
+     <td data-item-e="151">{{a.nt26}}</td>
+        <td data-item-e="152">{{a.ht26}}</td>
+        <td data-item-e="153">{{a.np26}}</td>
+        <td data-item-e="154">{{a.hp26}}</td>
+        <td data-item-e="155"><strong>{{a.totalth26}}</strong></td>
+        <td data-item-e="156"><strong>{{a.totalnota26}}</strong></td>
+     <td data-item-e="157">{{a.nt27}}</td>
+        <td data-item-e="158">{{a.ht27}}</td>
+        <td data-item-e="159">{{a.np27}}</td>
+        <td data-item-e="160">{{a.hp27}}</td>
+        <td data-item-e="161"><strong>{{a.totalth27}}</strong></td>
+        <td data-item-e="162"><strong>{{a.totalnota27}}</strong></td>
+     <td data-item-e="163">{{a.nt28}}</td>
+        <td data-item-e="164">{{a.ht28}}</td>
+        <td data-item-e="165">{{a.np28}}</td>
+        <td data-item-e="166">{{a.hp28}}</td>
+        <td data-item-e="167"><strong>{{a.totalth28}}</strong></td>
+        <td data-item-e="168"><strong>{{a.totalnota28}}</strong></td>
+     
+
+     
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>  
+
+
+<script>
+ $(document).ready(function() {
+    
+    for(var index = 1; index < 169; index++){
+      get_total("td[data-item-e="+ index +"]", "th[data-item="+ index +"]"); 
+ 
+    }
+ });
+  
+
+function get_total(data, data2){
+  var sum = 0;
+  $("#customers tbody tr").find(data).each(function(index, el) {   
+      sum += parseFloat($(this).text());
+
+  });
+  if (sum == 0)
+  {
+    $("#customers tbody tr").find(data).hide();
+    $("#customers thead tr").find(data2).hide();
+  }
+}
+
+
+</script>
+
+<script>
+ $(document).ready(function() {
+    
+    for(var index = 1; index < 169; index++){
+      get_totaln("td[data-item-n="+ index +"]", "th[data-item-w="+ index +"]");  
+    }
+ });
+  
+
+function get_totaln(data3,data4){
+  var sum = 0;
+  $("#customers tbody tr").find(data3).each(function(index, el) {   
+      sum += parseFloat($(this).text());
+      //alert(sum)
+  });
+  if (sum == 0){
+    $("#customers tbody tr").find(data3).hide();
+    $("#customers thead tr").find(data4).hide();
+  }
+}
+
+
+</script>
+
+
+
+
+<script>
+$(document).ready(function() {
+    $('#customers').DataTable( {
+        iDisplayLength: '500000',
+        dom: 'Bfrtip',
+        buttons: [
+            'excelHtml5',            
+            'pdfHtml5',
+        ]
+    });
+} );
+</script>
+
+</div>
+
+
+
+ <script type="text/javascript" src="/static/js/tableExport.js"></script>
+ <script type="text/javascript" src="/static/js/jquery.base64.js"></script>
+<script type="text/javascript" src="/static/js/html2canvas.js"></script>
+<script type="text/javascript" src="/static/js/jspdf/libs/sprintf.js"></script>
+<script type="text/javascript" src="/static/js/jspdf/jspdf.js"></script>
+<script type="text/javascript" src="/static/js/jspdf/libs/base64.js"></script>
+<script>
+onClick ="$('#tableID').tableExport({type:'pdf',escape:'false'});"
+
+</script>
+
+<script type="text/javascript">
+$("#reset").click(function () {
+      location.reload();
+    });
+</script>
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+
+        $(document).ready(function() {
+
+
+          $("#proceso").click(function() {
+            var x = $(this).val();
+            $("#total").append(x);
+
+            });
+
+            $("#sel1").click(function() {
+            var x = $(this).val();
+            $("#total").append(x);
+
+            });
+
+
+            $("#proyectos").change(function() {
+            var y = $(this).val();
+            $("#total").append(y);
+
+            });
+
+
+
+            $("#zip").change(function() {
+            var z = $(this).val();
+            $("#total").append(z);
+
+            });
+
+
+            $("#departamento").change(function() {
+            var d = $(this).val();
+            $("#total").append(d);
+            });
+
+            $("#categoria").change(function() {
+            var ca = $(this).val();
+            $("#total").append(ca);
+            });
+
+
+
+           $("#operador").change(function() {
+            var a = $(this).val();
+            $("#total").append(a);
+            });
+
+           $("#inactive").change(function() {
+            var i = $(this).val();
+            $("#total").append(i);
+            });
+
+            $("#numero").change(function() {
+            var n = $(this).val();
+            $("#total").append(n);
+            });
+
+
+            $("#code").change(function() {
+            var code = $(this).val();
+            $("#total").append(code);
+            });
+
+
+
+             $("#andor").change(function() {
+            var t = $(this).val();
+            $("#total").append(t);
+
+            });
+
+
+
+        });
+
+
+     $("button").submit(function(){
+    $.post("/exportar/", function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+});
+
+    </script>
+
+<script type="text/javascript">
+      $(document).ready(function(){
+              $("#limpiar").click(function(){
+              $("#fomulario")[0].reset();
+              });});
+
+    </script>
+
+{# plugin datepicker#}
+<script>
+   $(function() {
+    $('#datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+{#        onSelect: function(datetext){#}
+{#            var d = new Date(); // for now#}
+{#            datetext=datetext+" "+d.getHours()+": "+d.getMinutes()+": "+d.getSeconds();#}
+{#            $('#datepicker').val(datetext);#}
+{#        },#}
+    });
+});
+  </script>
+<script>
+
+
+$(function() {
+    $('#datepicker2').datepicker({
+        dateFormat: 'yy-mm-dd',
+{#        onSelect: function(datetext){#}
+{#            var d = new Date(); // for now#}
+{#            datetext=datetext+" "+d.getHours()+": "+d.getMinutes()+": "+d.getSeconds();#}
+{#            $('#datepicker2').val(datetext);#}
+{#        },#}
+    });
+});
+  </script>
+{# plugin datepicker#}
+  </script>
+     {% if error %}
+             <script>
+                 alert('{{ error }}');
+                 window.location= "/reporte_condensado_detallado_proceso/"
+             </script>
+         {% endif %}
+
+<script type="text/javascript">
+
+$(function(){
+    // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+    $("#agregar").on('click', function(){
+       $("#tabla tbody tr:eq(0)").clone().appendTo("#resultado");
+
+       $('#perron').on('click',function(){
+         var papa =$(this).text()
+         $("#valores").html('<html> <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well"><form action="/exportar_condensado_detallado_proceso/" method="post" id="formulario" role="form" enctype="multipart/form-data"><br> <input type="hidden" name="total" id=""  value="'+papa+'"class="form-control"> Usted Eligio los Siguiente Parametros'+papa+'</input><br><br><br><button type="submit" class="btn btn-primary">Enviar Consulta</button><form></div></html>');
+
+       });
+
+    });
+
+    // Evento que selecciona la fila y la elimina
+    $(document).on("click",".eliminar",function(){
+        var parent = $(this).parents().get(0);
+        $(parent).remove();
+    });
+
+
+
+
+
+});
+
+
+
+$("#del").click(function(){
+
+            // Obtenemos el total de columnas (tr) del id "tabla"
+
+            var trs=$("#eliminar tr").length;
+
+            if(trs>1)
+
+            {
+
+                // Eliminamos la ultima columna
+
+                $("#eliminar tr:last").remove();
+
+            }
+
+});
+</script>
+<script type="text/javascript">
+$("#reset").click(function () {
+      location.reload();
+    });
+</script>
+<script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $("#sel1").click(function() {
+            var x = $(this).val();
+            $("#sz").html(x);
+
+            });
+
+
+            $("#proyectos").change(function() {
+            var y = $(this).val();
+            $("#pa").html(y);
+
+            });
+
+
+             $("#like").change(function() {
+            var d = $(this).val();
+            var name = "''%"+d+"%''";
+            $("#pa").html(name);
+            });
+
+
+
+            $("#datepicker").click(function() {
+            var ac = $(this).val();
+            var fecha = "''"+ac+"''";
+            $("#pa").html(fecha);
+            });
+
+
+
+            $("#cuenta").click(function() {
+            var cuenta = $(this).val();
+            var fecha = "''"+cuenta+"''";
+            $("#pa").html(fecha);
+            });
+
+
+
+
+            $("#zip").change(function() {
+            var z = $(this).val();
+            $("#pa").html(z);
+
+            });
+
+              $("#proceso").change(function() {
+            var z = $(this).val();
+            $("#pa").html(z);
+
+            });
+
+
+
+            $("#departamento").change(function() {
+            var d = $(this).val();
+            $("#pa").html(d);
+            });
+
+            $("#status").change(function() {
+            var ca = $(this).val();
+            $("#pa").html(ca);
+            });
+
+
+
+           $("#operador").change(function() {
+            var a = $(this).val();
+            $("#oper").html(a);
+            });
+
+           $("#inactive").change(function() {
+            var i = $(this).val();
+            $("#pa").html(i);
+            });
+
+            $("#numero").change(function() {
+            var n = $(this).val();
+            $("#pa").html(n);
+            });
+
+
+            $("#code").change(function() {
+            var code = $(this).val();
+            $("#pa").html(code);
+            });
+
+
+            $("#proceso").change(function() {
+            var code = $(this).val();
+            $("#pa").html(code);
+            });
+
+
+
+            $("#opcionedu").change(function() {
+            var code = $(this).val();
+            $("#pa").html(code);
+            });
+
+            $("#andor").change(function() {
+            var t = $(this).val();
+            $("#co").html(t);
+
+            });
+
+
+        });
+
+
+         $("button").submit(function(){
+        $.post("/exportar/", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+                });
+            });
+
+    </script>
+<script type="text/javascript">
+      $(document).ready(function(){
+              $("#limpiar").click(function(){
+              $("#fomulario")[0].reset();
+              });});
+
+    </script>
+
+<script type="text/javascript">
+$(function() {
+    $('#datepicker').datepicker({
+      dateFormat: 'yy-mm-dd',
+
+
+    });
+});
+</script>
+
+</body>
+{% endblock %}
+
+
+
+ <script src="/sie/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker3.min.css"></script>
+</html>

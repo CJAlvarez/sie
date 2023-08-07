@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SIE-CONEANFO</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+     <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker3.min.css"></script>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script src="/static/css/sweetalert.min.js"></script>
+    <script src="/static/css/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="/static/css/sweetalert.css">
+
+</head>
+<!--oncontextmenu='return false' onkeydown='return false'-->
+<body >
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <br>
+                 <p>SISTEMA INFORMACION ESTADISTICA-SIE-CONEANFO</p>
+			    </div>
+
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <ul class="nav navbar-nav">
+			      </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+
+            </ul>
+
+			      <ul class="nav navbar-nav navbar-right">
+			        <li><a href="#">CONTACTO</a></li>
+			        <li><a href="#">INFORMACION DEL SISTEMA</a></li>
+			        <li><a href="#">{% if user.is_authenticated %}
+					    	BIENVENIDO-<strong>{{user.username|capfirst}}</strong>
+						{% endif %}</a></li>
+                                                      <li><a href="{% url 'vista_logout'  %}"> CERRAR SESION</a></li>
+
+
+			      </ul>
+			    </div>
+			  </div>
+		</nav>
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<div class="panel ">
+					<div class="panel-heading">
+						<h3 class="panel-title"></h3>
+					</div>
+					<div class="panel-body">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><strong>INSTITUCIONES Y PROYECTOS</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+    <table class="table">
+          <tr>
+                                    <td>
+                                       <a href="{% url 'vista_dashboard' %}">INICIO</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <a href="{% url 'vista_proceso_educativo' %}">PROCESO EDUCATIVO</a>
+                                    </td>
+                                </tr>
+                                
+                                  <tr>
+                                    <td>
+                                       <a href="{% url 'vista_staff_facilitadores' %}">FACILITADORES</a>
+                                    </td>
+                                </tr>
+
+         <tr>
+                                    <td>
+                                       <a href="{% url 'vista_modulos'%}">MODULOS PROCESO EDUCATIVOS</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                     <td>
+                                        <a href="{% url 'vista_participantes' %}">PARTICIPANTES</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <a href="{% url 'vista_matricula' %}">INGRESO PARTICIPANTES AL PROCESO</a>
+                                    </td>
+                                </tr>
+
+
+                                 <tr>
+                                    <td>
+                                       <a href="{% url 'vista_proyectos' %}">PROYECTOS</a>
+                                    </td>
+                                </tr>
+
+                                  <tr>
+                                    <td>
+                                       <a href="{% url 'vista_seguimientoparticipantes' %}">SEGUIMIENTO PARTICIPANTES</a>
+                                    </td>
+                                </tr>
+         <tr>
+                                    <td>
+                                       <a href="{% url 'vista_evaluaciones' %}">EVALUACIONES</a>
+                                    </td>
+                                </tr>
+                                 <!--
+                                <tr>
+
+
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Proyectos</a>
+                                    </td>
+                                </tr>
+                                   <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Procesos Educativos</a>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Seguimiento Participante</a>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                    <td>
+                                       <a>Evaluaciones</a>
+                                    </td>
+                                </tr>
+                                -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><strong>CATALAGOS Y REPORTES</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'vista_reportes' %}">REPORTES</a>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <strong>Perfil</strong></a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'vista_cambiarcontrasena'%}">CAMBIAR CONTRASEÑA</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="">MANUAL USUARIO</a></span>
+                                    </td>
+                                </tr>
+                              
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+					</div>
+				</div>
+			</div>
+                    {% block contenido %}
+
+</ul>
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 ">
+
+        </div>
+        <div id="rbuscado"></div>
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+
+        <div class="panel panel-primary">
+        	  <div class="panel-heading">
+        			<h3 class="panel-title">PROCESO EDUCATIVO</h3>
+
+        	  </div>
+        	  <div class="panel-body">
+                    <form class="navbar-form navbar-left"  >
+			        <div class="form-group">
+			          <input type="text" class="form-control" id="search2" autocomplete="off" placeholder="Buscar">
+			        </div>
+                    
+
+
+
+
+			      </form>
+                  <table id="my-table2"  class="table-responsive table-hover">
+                    <thead>
+                    <tr>
+                        <th width="310">CLAVE</th>
+                        <th width="310">PROCESO</th>
+                        <th>HORAS</th>
+                        <th width="310">FECHA INICIO</th>
+                        <th width="310">FECHA FINAL</th>
+                        <th width="310">SELECCIONA PROCESO</th>
+                        <th>MATRICULADOS
+                            </th>
+                        </tr>
+                    </thead>
+                                {{mensaje}}
+
+                      <form action="/matricula_ajax/" method="POST"  enctype="multipart/form-data">
+
+                    <tbody>
+
+                    {% for procesoeducativo in lista %}
+                    <tr>
+                        <td>{{procesoeducativo.clave}}</td>
+                        <td>{{procesoeducativo.Nombre_Proceso}}</td>
+                        <td>{{procesoeducativo.Total_Horas}}</td>
+                        <td>{{procesoeducativo.ev_fechainicial|date:"Y-m-d "}}</td>
+                        <td>{{procesoeducativo.ev_fechafinal|date:"Y-m-d "}}</td>
+                        <td>
+                            <input type="checkbox"name="clave" value="{{procesoeducativo.clave}}">
+                        </td>
+                        <td>
+                        <button type="button" id="busqueda" name="busqueda"  value="{{procesoeducativo.clave}}"  class="btn btn-xs btn-success">VER MATRICULA</button>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+        	  </div>
+        </div>
+        </div>
+
+
+
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+     
+ </div><div class="col-xs-9 col-sm-9 col-md-9 col-lg-6 ">
+
+            <div class="panel panel-success">
+            	  <div class="panel-heading">
+            			<h3 class="panel-title">PARTICIPANTES</h3>
+
+            	   </div>
+
+            	  <div class="panel-body">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                      <button type="submit" class="btn btn-primary">MATRICULAR</button>
+
+                <div class="table-responsive">
+                	<table id="my-table"  class="table table-hover">
+
+                		<thead>
+                			<tr>
+                                <th>CLAVE</th>
+                				<th>IDENTIDAD</th>
+                                <th>NOMBRE</th>
+                                <th>SEXO</th>
+                                <th>DEPARTAMENTO</th>
+                                <th>MUNICIPIO</th>
+                                <th>ALDEA</th>
+                                <th>CASERIO</th>
+
+                                <th>SELECCIONAR</th>
+
+                			</tr>
+                		</thead>
+                		<tbody>
+                               {% for p in personas %}
+
+                			<tr>
+                                <td>{{p.clavececap}}</td>
+                				<td>{{p.numero_identidad}}</td>
+                                <td>{{p.nombre_completo}}</td>
+                                <td>{{p.sexo}}</td>
+                                 <td>{{p.dep}}</td>
+                                <td>{{p.mun}}</td>
+                                <td>{{p.aldea}}</td>
+                                <td>{{p.caserio}}</td>
+
+                                <td>
+                                     <div class="checkbox">
+                                         <label><input type="checkbox" id="identidad" value="{{p.numero_identidad}}" data-identidad="{{p.numero_identidad}}" name="videntidad"></label>
+                                     </div>
+
+                                </td>
+
+                			</tr>
+                               {% endfor %}
+
+
+
+                               </form>
+
+    <form class="navbar-form navbar-left" id="formulariobusquedaidentidad" >
+			        <div class="form-group">
+			          <input type="text" class="form-control" id="search" autocomplete="off" placeholder="Buscar Identidad">
+			        </div>
+
+			      </form>
+
+                		</tbody>
+
+                	</table>
+                </div>
+
+			</div>
+                  </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="panel panel-danger">
+            	  <div class="panel-heading">
+            			<h3 class="panel-title">MATRICULADOS POR PROCESO EDUCATIVO</h3>
+            	  </div>
+            	  <div class="panel-body">
+                      <table id="resultado" class="table table-hover">
+
+        </table>
+
+            	  </div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+    $(function(){
+    $('button').click(function() {
+    var id = $(this).val();{
+    //alert(id)
+    //$('#resultado').html(id);
+    //sweetAlert(id)
+    $.ajax({
+    data:{'id':id},
+    url:'{% url 'vista_busquedappp' %}',
+    type:'post',
+    success: function(data){
+    //alert(data[0]);
+    //console.log(data);
+    var html="";
+    for(var i = 0; i < data.length ; i++){
+    html += "<tr><td>"+data[i].proceso+"</td><td>"+data[i].nombre+"</td><td>"+data[i].ide+"</td><td>"+data[i].dep+"</td><td>"+data[i].mun+"</td><td>"+data[i].al+"</td><td>"+data[i].ca+"</td><td><a class='btn btn-danger' name='identidad' value='"+data[i].ide+"' href='/matriculado_borrar/"+data[i].id+"/"+data[i].ide+"/"+data[i].claveev+"'>Borrar</a></td></tr>"}
+
+    $('#resultado').html(html);
+    }
+    });
+    };
+    })});
+</script>
+
+        <script>
+
+   // When document is ready: this gets fired before body onload 🙂
+$(document).ready(function(){
+        // Write on keyup event of keyword input element
+        $("#search").keyup(function(){
+            // When value of the input is not blank
+            if( $(this).val() != "")
+            {
+                // Show only matching TR, hide rest of them
+                $("#my-table tbody>tr").hide();
+                $("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+            }
+            else
+            {
+                // When there is no input or clean again, show everything back
+                $("#my-table tbody>tr").show();
+            }
+        });
+    });
+    // jQuery expression for case-insensitive filter
+    $.extend($.expr[":"],
+    {
+        "contains-ci": function(elem, i, match, array)
+        {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
+
+
+        </script>
+        <script>
+
+   // When document is ready: this gets fired before body onload 🙂
+$(document).ready(function(){
+        // Write on keyup event of keyword input element
+        $("#search2").keyup(function(){
+            // When value of the input is not blank
+            if( $(this).val() != "")
+            {
+                // Show only matching TR, hide rest of them
+                $("#my-table2 tbody>tr").hide();
+                $("#my-table2 td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+            }
+            else
+            {
+                // When there is no input or clean again, show everything back
+                $("#my-table2 tbody>tr").show();
+            }
+        });
+    });
+    // jQuery expression for case-insensitive filter
+    $.extend($.expr[":"],
+    {
+        "contains-ci": function(elem, i, match, array)
+        {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+    });
+
+
+        </script>
+
+
+ <div class="table-responsive">
+     <table class="table table-hover">
+         <thead>
+             <tr>
+                 <th></th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr>
+                 <td></td>
+             </tr>
+         </tbody>
+     </table>
+ </div>
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+	<footer>
+  <div class="container">
+    <h5>Sistema SIE-CONEANFO <a href="http://www.coneanfo.hn/" rel="author"></a> Derechos Reservados @ 2017</h5>
+  </div>
+</footer>
+</div>
+
+	</div>
+    {% endblock %}
+	<script src="/static/js/bootstrap.min.js"></script>
+    <a href="matriculado_borrar"></a>
+ </body>
+</html>
+
+

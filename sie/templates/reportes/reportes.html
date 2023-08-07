@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" >
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SIE-CONEANFO</title>
+	    <link rel="stylesheet" href="/static/css/login.css">
+       <link rel="stylesheet" href="/static/css/bootstrap.css">
+
+</head>
+<body>
+{% extends "dashboard.html"%}
+
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {% block contenido %}
+
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title"></h3>
+					</div>
+					<div class="panel-body">
+
+                        <table class="table table-hover">
+                        	<thead>
+                        		<tr>
+                        			<th>NOMBRE REPORTE</th>
+                                    <th>TIPO</th>
+                                    <th>GENERAR REPORTE</th>
+
+                        		</tr>
+                        	</thead>
+                        	<tbody>
+                        		<tr>
+                        			<td>REPORTE PARTICIPANTES</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_participantes'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                        		</tr>
+                            	<tr>
+                        			<td>REPORTE EDUCADORES</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_educadores'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                        		</tr>
+
+                                <tr>
+                                    <td>REPORTE SEGUIMIENTO PERSONAS</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_seguimiento'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+                                 <tr>
+                                    <td>REPORTE CONSOLIDADO PROYECTOS</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_proyectos'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+
+
+                                 
+
+
+                                <tr>
+                                    <td>CONSOLIDADO GLOBAL DE MATRICULA Y DESERCION</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_global_matricula_desercion'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+
+                                 <tr>
+                                    <td>REPORTE PERSONAS ATENDIDAS</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_personas_atendidas'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+
+
+<!--
+                                  <tr>
+                                    <td>REPORTE PASA NO PASA</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_pasanopasa'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+-->
+                                 <tr>
+                                    <td>REPORTE CENTROS FORMACION</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_centro_formacion'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>REPORTE PROCESO POR LUGAR</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_lugar'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>REPORTE CURSOS POR FACILITADOR</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_facilitador'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+
+
+
+
+                                 <tr>
+                                    <td>REPORTE CONDENSADO  PROCESO</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_condensado_proceso'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+                                        </tr>
+
+                                <tr>
+                                    <td>REPORTE CONDENSADO  DETALLADO PROCESO</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href="{% url 'vista_filtro_condensado_detallado_proceso'%}"><button type="button" class="btn btn-danger">CREAR</button></a></th>
+                                        </tr>        
+<!--
+                                
+                                 <tr>
+                                    <td><strong>NO existe</strong>REPORTE CONSOLIDADO GLOBAL</td>
+                                    <td>ESTADISTICOS</td>
+                                    <th>
+                                        <a href=""><button type="button" class="btn btn-danger">CREAR</button></a></th>
+
+                                </tr>
+    -->                           
+                        	</tbody>
+                        </table>
+
+					</div>
+				</div>
+			</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+	<footer>
+  <div class="container">
+    <p>Sistema SIE-CONEANFO <a href="http://www.coneanfo.hn/" rel="author"></a> Derechos Reservados @ 2017</p>
+  </div>
+</footer>
+</div>
+
+	</div>
+{% endblock %}
